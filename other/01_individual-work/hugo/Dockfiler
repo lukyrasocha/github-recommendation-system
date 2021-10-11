@@ -1,7 +1,0 @@
-FROM deepnote/python:3.7
-
-RUN apt-get update && apt-get install --yes --no-install-recommends software-properties-common 
-RUN add-apt-repository "deb [ arch=amd64 ] https://downloads.skewed.de/apt buster main"
-RUN apt-key adv --keyserver keys.openpgp.org --recv-key 612DEFB798507F25
-RUN apt-get update && apt-get install --yes --no-install-recommends python3-graph-tool
-RUN mv /usr/lib/python3/dist-packages/graph_tool /usr/local/lib/python3.7/site-packages
