@@ -129,4 +129,5 @@ dmypy.json
 .pyre/
 
 # Data to ignore
-data/projections
+data/projections/pickle_format
+data/projections/edge_list_format
