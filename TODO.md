@@ -48,7 +48,3 @@ MIKA
 Learnit: A clear statement of your research question, the result of project phase #3.
 
 Learnit: The analysis, results, and interpretation that allow you to answer your research question, the result of project phase #4.
-
----
-
-How to utilize node attributes - chapter 26 and 27 in the book (not part of mandatory curriculum)
