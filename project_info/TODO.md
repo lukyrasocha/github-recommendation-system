@@ -71,7 +71,14 @@
 
 ### On projected graphs
 
-- [ ] _(Add relevant methods here)_
+- [x] Random walk
+- [x] Label propagation
+- [_] Mutual information
+
+#### Metrics to evaluate communities
+- [x] Modularity 
+- [x] Coverage
+- [x] Performance
 
 ### On the original bi-partite network
 

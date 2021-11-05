@@ -3,9 +3,9 @@ import networkx as nx
 import pandas as pd
 
 
-def CD_unipartite(Graph, method = 'label_prop',weight_name='score'):
+def CD_unipartite(Graph, method = 'label_prop_semi',weight_name='score'):
     """
-    method options = ['label_prop_semi','label_prop_asyn','max_modularity']
+    method options = ['label_prop_semi','label_prop_asyn','max_modularity','random_walk']
     'label_prop_asyn'
     -----------------
     The algorithm proceeds as follows. After initializing each node with a unique label, the algorithm repeatedly sets the label of a node to be the label that appears most frequently among that nodes neighbors. The algorithm halts when each node has the label that appears most frequently among its neighbors. The algorithm is asynchronous because each node is updated without waiting for updates on the remaining nodes.
@@ -85,17 +85,22 @@ def Partition_measure(Graph,communities,method = 'modularity',weight_name='score
 if __name__ == '__main__':
 
     #Read graph
-    edge_list = pd.read_csv('backbone_test.csv')
+    edge_list = pd.read_csv('../data/backboning/df_table_simple_weight.csv')
     G = nx.from_pandas_edgelist(edge_list,'src','trg', edge_attr='score')
-    print(G.edges(data=True))
-    G2 = nx.karate_club_graph()
-    print(G.get_edge_data('r1','r1111').get('score',1))
+
+    comm = CD_unipartite(G,method='label_prop_semi')
+
+    print("Moduarity: ",Partition_measure(G,comm))
+
+    #print(G.edges(data=True))
+    #G2 = nx.karate_club_graph()
+    #print(G.get_edge_data('r1','r1111').get('score',1))
 
     #Print communities
-    print(list(CD_unipartite(G, method='random_walk')))
+    #print(list(CD_unipartite(G, method='random_walk')))
 
     #Quality measure
-    print('Quality:', Partition_measure(G,CD_unipartite(G, method='label_prop_semi'),method='modularity'))
+    #print('Quality:', Partition_measure(G,CD_unipartite(G, method='label_prop_semi'),method='modularity'))
 
 
 
