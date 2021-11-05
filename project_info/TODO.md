@@ -12,14 +12,18 @@
 
 - [x] Get the data into suitable format such that they can be easily readed into NetworkX Graph as edgelist. See the result in: `data/transformed/data.txt`.
 - [x] Extract the metadata for each repository and save is as a JSON so we can then easily added to NX graph nodes object. See the result in `data/transformed/metadata.json`.
-- [ ] Network cleaning
+- [x] Network cleaning (see the corresponding section in `main.ipynb`)
   - Take care of mismatches between repos.txt and lang.txt
-  - We should filter out nodes whose edges were randomly removed, see my node in slack channel phase-02-eda
+  - Take care of nodes whose edges were randomly removed, see my node in slack channel phase-02-eda
 
 ## Do a summary of our bipartite network
 
-- [x] Degree distribution
 - [x] Core metrics such as number of nodes, edges, any self-loops etc.
+- [x] Top 10 repositories in terms number of watches
+- [x] Top 10 languages in terms of usage
+- [ ] Clustering metrics
+- [ ] Degree distribution - partially done, needs to be translated into seaborn and the figure should be saved
+- [ ] Power law fit - partially done, needs to be translated into seaborn and the figure should be saved
 - [ ] (Add more here if needed)
 
 ## Network projection
