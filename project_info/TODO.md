@@ -1,3 +1,7 @@
+## General
+
+- [ ] Add proper requirements.txt file
+
 ## Network Selection and basic summary
 
 - [x] Choose a proper network to work on
@@ -21,9 +25,8 @@
 - [x] Core metrics such as number of nodes, edges, any self-loops etc.
 - [x] Top 10 repositories in terms number of watches
 - [x] Top 10 languages in terms of usage
-- [ ] Clustering metrics
-- [ ] Degree distribution - partially done, needs to be translated into seaborn and the figure should be saved
-- [ ] Power law fit - partially done, needs to be translated into seaborn and the figure should be saved
+- [x] Degree distribution
+- [ ] Power law fit - partially done - need to add comments regards to the computation
 - [ ] (Add more here if needed)
 
 ## Network projection
@@ -35,13 +38,19 @@
   - Heats
   - Hyperbolic
   - Vectorised projections (e.g. Cosine) - Implemented but due to performance reasons excluded it
+- [ ] Add description/comment to the above defined methods
 
 ## Network backboning
 
 - [x] Do network backboning using following methods:
+
   - Disparity filter
   - Noise corrected filter
   - Double Stochastic - attempted but did not converge
+
+- [ ] Save all backboned graphs for the later use
+
+- _(Add more here if needed)_
 
 ## Compute standard network summary metrics
 
