@@ -1,3 +1,13 @@
+## Problem analysis
+
+### `Problem statement, RQ, understanding the problem`
+
+- See [this](https://docs.google.com/presentation/d/13dyLBafxCt2VNjRtrBzkrYpuNhHQViyT52FdB1JcBHQ/edit#slide=id.g100a2b6b40c_0_0) slide
+
+### `Possible ways to solve the problem`
+
+- _Add relevant slide_
+
 ## Ideas/Notes to the readings
 
 ### Comunnity Discovery 1

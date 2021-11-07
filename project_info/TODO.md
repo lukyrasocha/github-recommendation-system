@@ -60,6 +60,16 @@
   - Power law degree fit
   - (Add more here if needed)
 
+## Community discovery
+
+### On projected graphs
+
+- [ ] _(Add relevant methods here)_
+
+### On the original bi-partite network
+
+- [ ] _(Add relevant methods here)_
+
 _(Note that there might be additional sections added to here)_
 
 ## Visualisation
