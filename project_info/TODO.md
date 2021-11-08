@@ -2,6 +2,10 @@
 
 - [ ] Add proper requirements.txt file
 
+## Questions to ask
+
+- [ ] How to deal with too many components in the network?
+
 ## Network Selection and basic summary
 
 - [x] Choose a proper network to work on

@@ -6,7 +6,7 @@
 
 ### `Possible ways to solve the problem`
 
-- _Add relevant slide_
+- See [this](https://docs.google.com/presentation/d/13dyLBafxCt2VNjRtrBzkrYpuNhHQViyT52FdB1JcBHQ/edit#slide=id.g100b71d134b_0_0) and following couple slides
 
 ## Ideas/Notes to the readings
 
