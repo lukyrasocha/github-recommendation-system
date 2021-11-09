@@ -52,7 +52,7 @@
   - Noise corrected filter
   - Double Stochastic - attempted but did not converge
 
-- [ ] Save all backboned graphs for the later use
+- [x] Save all backboned graphs for the later use
 
 - _(Add more here if needed)_
 
