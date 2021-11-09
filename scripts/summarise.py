@@ -10,12 +10,18 @@ from time import time
 from datetime import date
 import networkx as nx
 
+from markdown import markdown
+import pdfkit
+
 # custom imports
 from metrics import export_metrics
 from plotting import generate_plots
 
 
-def generate_markdown(G, filepath, name='unnamed'):
+def generate_markdown(G, filepath, name='unnamed', save_name=None, plain=True):
+    if save_name == None:
+        save_name = name
+
     savepath = f'{filepath}/{name}'
     os.makedirs(savepath) if not os.path.exists(savepath) else None
 
@@ -31,11 +37,19 @@ def generate_markdown(G, filepath, name='unnamed'):
     # metrics
     for section in stats:
         s += f'## {section}\n---\n'
-        s += '<table>\n<tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>\n'
+        if not plain:
+            s += '<table>\n<tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>\n'
+        else:
+            s += '| Network Statistics | Results |\n'
+            s += '|---|---|\n'
 
         for func_name, res in stats[section].items():
-            s +=f"<tr><td>{func_name}</td><td>{res if not None else 'TimeoutException'}</td></tr>\n"
-        s += '</table>\n\n'
+            if not plain:
+                s += f"<tr><td>{func_name}</td><td>{res if not None else 'TimeoutException'}</td></tr>\n"
+            else: 
+                s += f"| {func_name} | {res if not None else 'timeoutException'} |\n"
+        if not plain:
+            s += '</table>\n\n'
 
 
     # plots
@@ -45,11 +59,25 @@ def generate_markdown(G, filepath, name='unnamed'):
         s += f'![image](./assets/{file})'
 
     # write all string to markdown file
-    with open(f'{savepath}/{name}.md', 'w') as outfile:
+    with open(f'{savepath}/{save_name}.md', 'w') as outfile:
         outfile.write(s)
+
+
+def generate_pdf(filepath, name, save_name=None):
+    if not save_name:
+        save_name=name
+    with open(f'{filepath}/{name}/{save_name}.md', 'r') as f:
+        html_text = markdown(f.read(), output_format='html4')
+
+    pdfkit.from_string(html_text, f'{filepath}/{name}/{save_name}.pdf')
+
+def generate_summary(G, filepath, name='unnamed'):
+    generate_markdown(G, filepath, name=name, save_name=name+'_plain', plain=True)
+    generate_markdown(G, filepath, name=name, plain=False)
+    #generate_pdf(filepath, name)
 
 
 if __name__ == '__main__':
     # test code
     G = nx.karate_club_graph()
-    generate_markdown(G, filepath='../data/graph_summaries', name='karate')
+    generate_summary(G, filepath='../data/graph_summaries', name='karate')
