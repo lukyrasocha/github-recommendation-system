@@ -12,6 +12,44 @@
 
 ### Comunnity Discovery 1
 
+
+#### Chapter 2
+
+- Talks about probability theory to make inferences about uncertain events
+
+- Mentions frequenist approach and bayesian approach 
+
+- Markov processes which are sotchastic processes (changes over time)
+
+- Mutual information tells how related two random variables are
+
+#### Chapter 3 simple graphs
+
+- Introduction to the different graphs
+
+
+#### Chapter 4 Extended graphs
+
+- talks about biparte networks and all the other types of networks
+
+#### Chapter 5 Matrices
+
+- Mentions all the different types of matrices
+
+- transposing a matrix means mirroring it on its main diagonal and can be used to look at two different modes of connection in a biparte network
+
+#### Chapter 7 Paths & walks
+
+- introduction to the different properties of graphs such as cyclic, acyclic, tree etc.
+
+- "You can count the number of connected components in a graph by counting the number of eigenvalues equal to one of its stochastic adjacency matrix. The non-zero entries in the corresponding eigenvectors tell you which nodes are in which connected component" taken from the book (might be worth remembering for the exam)
+
+- Mentions strong and weak components (strong abide by the edge direction and weak ignore the edge direction)
+
+#### Chapter 8 Random walk
+
+- 
+
 #### Chapter 31
 
 - Since we have a lot of disconnected components, we should examine first their size and then perhaps figure out if it even makes sense to actually do community discovery. In other words, if we decide to do community discovery, then we should indeed do it on the largest components
