@@ -56,13 +56,16 @@
 
 - _(Add more here if needed)_
 
-## Compute standard network summary metrics
+## Analysis of the projected networks
 
 - [ ] Analyse each method (Projection + Backboning) using:
+
   - Edge weight distribution
   - Degree Distribution
   - Power law degree fit
   - (Add more here if needed)
+
+- [ ] Plot of all projections with relevant metrics
 
 ## Community discovery
 
