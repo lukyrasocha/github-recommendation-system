@@ -14,7 +14,7 @@ import seaborn as sns
 import networkx as nx
 from tqdm import tqdm
 
-from metrics import get_degrees
+import metrics 
 
 # global settings
 sns.set_style("darkgrid")
@@ -31,7 +31,7 @@ def plot_single_degree_distribution(degrees, name='', ax=None, figsize=(5,5), sc
                     ax=ax, 
                     alpha=0.6)
 
-    ax.set_title(f"Degree Distribution of {name} ({scale.title()}-Scale)", weight = "bold")
+    ax.set_title(f"Degree Distribution of {name.title()} ({scale.title()}-Scale)", weight = "bold")
     ax.set(xlabel='Degrees ($k$)', ylabel='Counts')
 
     if scale == 'log':
@@ -44,17 +44,38 @@ def plot_single_degree_distribution(degrees, name='', ax=None, figsize=(5,5), sc
     return ax
 
 def plot_degree_distribution(*degrees, names=None, figsize=(5, 5), scale='linear'):
-    n_plots = len(degrees)
-    fig, axs = plt.subplots(ncols=n_plots, figsize=(figsize[0]*n_plots, figsize[1]))
+    if type(scale) == str:
+        scale = [scale]
     if names == None:
-        names = ['' for _ in range(len(degrees))]
+        names = ['Unnamed' for _ in range(len(degrees))]
 
-    if n_plots > 1:
+    n_rows = len(degrees)
+    n_cols = len(scale)
+
+    fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, figsize=(figsize[0]*n_cols, figsize[1]*n_rows))
+
+    if n_rows > 1 and n_cols > 1:
+        for h_ax, s in zip(axs, scale):
+            for ax, degree, name in zip(h_ax, degrees, names):
+                fig = plot_single_degree_distribution(degree, name, 
+                                                      figsize=figsize, 
+                                                      ax=ax, 
+                                                      scale=s)
+
+    elif n_rows > 1:
         for ax, degree, name in zip(axs, degrees, names):
             fig = plot_single_degree_distribution(degree, name, 
                                                   figsize=figsize, 
                                                   ax=ax, 
                                                   scale=scale)
+
+    elif n_cols > 1:
+        for ax, s in zip(axs, scale):
+            fig = plot_single_degree_distribution(degrees[0], names[0], 
+                                                  figsize=figsize, 
+                                                  ax=ax, 
+                                                  scale=s)
+
     else:
         fig = plot_single_degree_distribution(degrees[0], names[0], 
                                               figsize=figsize,
@@ -65,21 +86,32 @@ def plot_degree_distribution(*degrees, names=None, figsize=(5, 5), scale='linear
 
 
 
-def test():
+def generate_plots(G, name, filepath='.'):
+    os.makedirs(filepath) if not os.path.exists(filepath) else None
+
+    names = ['degree_distribution']
+    funcs = [plot_degree_distribution]
+
+    for func_name, func in zip(names, funcs):
+        if func_name == 'degree_distribution': 
+            fig = func(metrics.get_degrees(G), names=[name], scale=['linear', 'log'])
+        
+        plt.savefig(f'{filepath}/{func_name}.jpg')
+
+
+if __name__ == '__main__':
+    # test code
+    """
     G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
     G2 = nx.read_gpickle('../data/projections/pickle_format/heats.pickle')
     """
+
     G = nx.karate_club_graph()
     G2 = nx.karate_club_graph()
-    """
 
-    degrees = get_degrees(G)
-    degrees2 = get_degrees(G2)
+    degrees = metrics.get_degrees(G)
+    degrees2 = metrics.get_degrees(G2)
 
-    fig = plot_degree_distribution(degrees, degrees2, 
-                                   names=['Simple Weight Projection', 'Heats Projection'],
-                                   scale='log')
+    fig = plot_degree_distribution(degrees, degrees2,
+                                   scale=['linear', 'log'])
     plt.show()
-
-if __name__ == '__main__':
-    test()
