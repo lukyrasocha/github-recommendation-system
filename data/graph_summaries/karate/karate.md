@@ -1,7 +1,7 @@
 # Generic Summary of Unipartite Graph **Karate**
 ---
 Created: 09/11/21
-Computation Time: 0.57sec
+Computation Time: 0.74sec
 
 ## Basic Statistics
 ---
