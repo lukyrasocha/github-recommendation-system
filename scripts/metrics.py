@@ -376,11 +376,11 @@ def degree_centrality(G, n):
     -------
     nodes : iterable(node)      |   N most degree central nodes  
     """
-    return sorted([item for item in nx.algorithms.centrality.degree_centrality(G)], 
-                    key=lambda item: item[1], reverse=True)[:n]
+    return [x[0] for x in sorted([item for item in nx.algorithms.centrality.degree_centrality(G).items()], 
+                key=lambda item: item[1], reverse=True)[:n]]
 
 @break_after(STOP_EXECUTION)
-def betweenness_centraliy(G, n):
+def betweenness_centrality(G, n):
     """
     Returns the n nodes with highest betweenness centrality 
     from a nx.Graph.
@@ -394,102 +394,59 @@ def betweenness_centraliy(G, n):
     -------
     nodes : iterable(node)      |   N most between nodes
     """
-    return sorted([item for item in nx.algorithms.centrality.betweenness_centrality(G)], 
-                    key=lambda item: item[1], reverse=True)[:n]
+    return [x[0] for x in sorted([item for item in nx.algorithms.centrality.betweenness_centrality(G).items()], 
+                key=lambda item: item[1], reverse=True)[:n]]
 
 
 
 
-#--- NETWORK STATISTIC BUNDLERS 
+#--- NETWORK STATISTIC BUNDLER
 #--- Combines functions in similar fields into dictionary to conveniently call together (also faster in execution)
-def basic_metrics(G):
-    return {'Number of Nodes': number_of_nodes(G), 
-            'Number of Edges': number_of_edges(G), 
-            'Global Density' : f'{round(global_density(G)*100, 2)}%'}
-            #'Global Diameter': global_diameter(G),
-            #'Average Diameter': f'{round(average_diameter(G), 2)}', 'Five-Number-Summary Diameter': summarise_diameter(G)}
-
-def degree_metrics(G):
+def export_metrics(G):
     degrees = get_degrees(G)
-    if degrees != None:
-        return {'Average Degree': f'{round(average_degree(degrees), 2)}',
-                'Five-Number-Summary Degrees': summarise_degrees(degrees)}
-    else: 
-        return {name: 'TimeoutException' for name in ['Average Degree', 'Five-Number-Summary Degrees']}
-
-def lcc_metrics(G):
     lccs = get_lccs(G)
-    if lccs != None:
-        return {'Average LCC': f'{round(average_lcc(lccs), 2)}',
-                'Five-Number-Summary LCC': summarise_lcc(lccs)}
-    else: 
-        return {name: 'TimeoutException' for name in ['Average LCC', 'Five-Number-Summary LCCS']}
+    ccs = get_ccs(G)
 
-    
-def cc_metrics(G):
-    ccs  = get_ccs(G)
-    if ccs != None:
-        return  {'Number of CC': number_of_ccs(ccs), 
+    return {'Basic Statistics': 
+                 {
+                 'Number of Nodes': number_of_nodes(G), 
+                 'Number of Edges': number_of_edges(G), 
+                 'Global Density' : f'{round(global_density(G)*100, 2)}%'
+                    #'Global Diameter': global_diameter(G),
+                    #'Average Diameter': f'{round(average_diameter(G), 2)}', 'Five-Number-Summary Diameter': summarise_diameter(G)}
+                 },
+            'Degree Statistics': 
+                {
+                'Average Degree': f'{round(average_degree(degrees), 2)}',
+                'Five-Number-Summary Degrees': summarise_degrees(degrees)
+                },
+            'Clustering Statistics':
+                {
+                'Average LCC': f'{round(average_lcc(lccs), 2)}',
+                'Five-Number-Summary LCC': summarise_lcc(lccs)
+                },
+            'Connected Components Statistics': 
+                {
+                 'Number of CC': number_of_ccs(ccs), 
                  'Average CC Size': f'{round(average_cc_size(ccs), 2)}', 
                  'Five-Number-Summary of CC Sizes': summarise_cc_size(ccs),
-                 'Average CC Density': average_cc_density(G, ccs),
-                 'Five-Number-Summary of CC Densities': summarise_cc_density(G, ccs)}
-
-def generic_markdown_summary(G, filepath, name):
-    titles = ['Basic Metrics', 
-              'Degree Metrics', 
-              'Clustering (LCC) Metrics', 
-              'Connected Componenent (CC) Metrics']
-    meta_funcs = [basic_metrics, degree_metrics, lcc_metrics, cc_metrics]
-
-    s = f"# Generic Summary of Unipartite Graph **{name}**\n---\n"
-    s += f"Created: {date.today().strftime('%d/%m/%y')}\n\n"
-
-    for title, meta_func in zip(titles, meta_funcs):
-        s += f'## {title}\n---\n'
-        s += "|   Network Statistic   |   Computed Value   |\n"
-        s += "|:---------------------:|:---------------------------------------------:|\n"
-        for func_name, res in tqdm(meta_func(G).items()):
-            s += f"|   {func_name}   |   {res if not None else 'TimeoutException'}   |\n"
-        s += '\n\n'
-
-    with open(f'{filepath}/{name}.md', 'w') as outfile:
-        outfile.write(s)
+                 'Average CC Density': average_cc_density(ccs),
+                 'Five-Number-Summary of CC Densities': summarise_cc_density(ccs)
+                },
+            'Centrality Statistics':
+                {
+                'Degree Centrality': degree_centrality(G, 10),
+                'Betweenness Centrality': betweenness_centrality(G, 10)
+                }
+            }
 
 
-def test():
-    G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
-    # G = nx.karate_club_graph()
-
-    generic_markdown_summary(G, '.', 'test')
-
-
-    """
-    def gen_l(n):
-        return [[(i,j) for i in range(n)] for j in range(n)]
-
-    gen_l(10000)
+if __name__ == '__main__':
+    # G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
     start = time.time()
-    #df = pd.read_csv('../data/backboning/nc_table_simple_weight.csv')
-    #G = nx.from_pandas_edgelist(df, source='src', target='trg', edge_attr='score')
-    #G = nx.karate_club_graph()
+    G = nx.karate_club_graph()
     end = time.time()
     print(f'Finished Reading in {end-start}s')
 
-    # print(nx.clustering(G))
-
-    print(number_of_nodes(G))
-    print(number_of_edges(G))
-    print(global_density(G))
-    print('\nDegree Metrics')
-    print(degree_metrics(G))
-    
-    print('\nLCC Metrics')
-    print(lcc_metrics(G))
-
-    print('\nCC Metrics')
-    print(cc_metrics(G))
-    """
-
-if __name__ == '__main__':
-    test()
+    print(degree_centrality(G, 10))
+    print(betweenness_centrality(G, 10))
