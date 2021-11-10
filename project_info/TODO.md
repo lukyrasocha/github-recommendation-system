@@ -30,7 +30,7 @@
 - [x] Top 10 repositories in terms number of watches
 - [x] Top 10 languages in terms of usage
 - [x] Degree distribution
-- [ ] Power law fit - partially done - need to add comments regards to the computation
+- [x] Power law fit - partially done - need to add comments regards to the computation
 - [ ] (Add more here if needed)
 
 ## Network projection
@@ -56,16 +56,17 @@
 
 - _(Add more here if needed)_
 
-## Analysis of the projected networks
+## Analysis of Metrics and Visualising Unipartite Networks (Projection/ Backboned Networks)
 
-- [ ] Analyse each method (Projection + Backboning) using:
+- [ ] Add further plots to generated markdown (ccdf of dd, power law fit, distribution 
+                                                of edge weights, distribution of cc sizes, ...)
+- [ ] Find way to automatically convert MD into well-formatted PNG, PDF (to load
+      file into Jupyter while displaying plots) / alternatively: find out why iPython's
+      display(Markdown) does not show the produced local plots
 
-  - Edge weight distribution
-  - Degree Distribution
-  - Power law degree fit
-  - (Add more here if needed)
-
-- [ ] Plot of all projections with relevant metrics
+- [ ] maybe create handle 'bipartite' that allows to compute all metrics and plots for each
+      class of nodes individually
+      
 
 ## Community discovery
 
@@ -85,6 +86,13 @@
 - [ ] _(Add relevant methods here)_
 
 _(Note that there might be additional sections added to here)_
+
+## Other
+
+- [ ] make helperfunction to produce metadata about computationally heavy runs 
+- [ ] after done: rerun those computations and produce the metadata
+- [ ] move projection methods into csripts (?)
+
 
 ## Visualisation
 
