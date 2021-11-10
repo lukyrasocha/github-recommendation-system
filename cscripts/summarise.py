@@ -6,6 +6,7 @@
 # author: jonas-mika senghaas
 
 import os
+import sys
 from time import time
 from datetime import date
 import networkx as nx
@@ -13,9 +14,13 @@ import networkx as nx
 from markdown import markdown
 import pdfkit
 
+local_path = os.path.dirname(os.path.realpath(__file__))
+if local_path not in sys.path:
+    sys.path.append(local_path)
+
 # custom imports
-from cscripts.metrics import export_metrics
-from cscripts.plotting import generate_plots
+from metrics import export_metrics
+from plotting import generate_plots
 
 
 def generate_markdown(G, filepath, name='unnamed', save_name=None, plain=True):

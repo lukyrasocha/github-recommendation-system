@@ -5,6 +5,7 @@
 # author            : jonas-mika senghaas
 
 import os
+import sys
 import time
 from datetime import date
 import numpy as np
@@ -12,7 +13,11 @@ import pandas as pd
 import networkx as nx
 from tqdm import tqdm
 
-from cscripts.handle_timeout import * 
+local_path = os.path.dirname(os.path.realpath(__file__))
+if local_path not in sys.path:
+    sys.path.append(local_path)
+
+from handle_timeout import * 
 
 #--- GLOBAL SETUP 
 STOP_EXECUTION = 15 
@@ -422,16 +427,16 @@ def export_metrics(G):
                 },
             'Clustering Statistics':
                 {
-                'Average LCC': f'{round(average_lcc(lccs), 2)}',
-                'Five-Number-Summary LCC': summarise_lcc(lccs)
+                'Average LCC': f'{round(average_lcc(lccs), 2) if lccs else None}',
+                'Five-Number-Summary LCC': summarise_lcc(lccs) if lccs else None
                 },
             'Connected Components Statistics': 
                 {
-                 'Number of CC': number_of_ccs(ccs), 
-                 'Average CC Size': f'{round(average_cc_size(ccs), 2)}', 
-                 'Five-Number-Summary of CC Sizes': summarise_cc_size(ccs),
-                 'Average CC Density': average_cc_density(ccs),
-                 'Five-Number-Summary of CC Densities': summarise_cc_density(ccs)
+                 'Number of CC': number_of_ccs(ccs) if ccs else None, 
+                 'Average CC Size': f'{round(average_cc_size(ccs), 2) if ccs else None}', 
+                 'Five-Number-Summary of CC Sizes': summarise_cc_size(ccs) if ccs else None,
+                 'Average CC Density': average_cc_density(ccs) if ccs else None,
+                 'Five-Number-Summary of CC Densities': summarise_cc_density(ccs) if ccs else None
                 },
             'Centrality Statistics':
                 {

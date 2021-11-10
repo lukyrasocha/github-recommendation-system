@@ -5,7 +5,13 @@
 # author            : jonas-mika senghaas
 
 import os
+import sys
 from collections import Counter
+
+# allow imports locally (without referring to module structure)
+local_path = os.path.dirname(os.path.realpath(__file__))
+if local_path not in sys.path:
+    sys.path.append(local_path)
 
 import numpy as np
 import pandas as pd
@@ -14,7 +20,7 @@ import seaborn as sns
 import networkx as nx
 from tqdm import tqdm
 
-import cscripts.metrics 
+from metrics import get_degrees
 
 # global settings
 sns.set_style("darkgrid")
@@ -94,7 +100,7 @@ def generate_plots(G, name, filepath='.'):
 
     for func_name, func in zip(names, funcs):
         if func_name == 'degree_distribution': 
-            fig = func(metrics.get_degrees(G), names=[name], scale=['linear', 'log'])
+            fig = func(get_degrees(G), names=[name], scale=['linear', 'log'])
         
         plt.savefig(f'{filepath}/{func_name}.jpg')
 
