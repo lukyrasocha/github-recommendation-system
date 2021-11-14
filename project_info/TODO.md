@@ -1,10 +1,10 @@
 ## General
 
-- [ ] Add proper requirements.txt file
+- [x] Add proper requirements.txt file
 
 ## Questions to ask
 
-- [ ] How to deal with too many components in the network?
+- [x] How to deal with too many components in the network? (See slack)
 
 ## Network Selection and basic summary
 
@@ -58,15 +58,22 @@
 
 ## Analysis of Metrics and Visualising Unipartite Networks (Projection/ Backboned Networks)
 
-- [ ] Add further plots to generated markdown (ccdf of dd, power law fit, distribution 
-                                                of edge weights, distribution of cc sizes, ...)
+- [ ] Add further plots to generated markdown (ccdf of dd, power law fit, distribution
+      of edge weights, distribution of cc sizes, ...)
 - [ ] Find way to automatically convert MD into well-formatted PNG, PDF (to load
       file into Jupyter while displaying plots) / alternatively: find out why iPython's
       display(Markdown) does not show the produced local plots
 
 - [ ] maybe create handle 'bipartite' that allows to compute all metrics and plots for each
       class of nodes individually
-      
+
+## Finding relevant repositories: [method 1]
+
+- [ ] _(Add relevant todos)_
+
+## Finding relevant repositories: [method 2]
+
+- [ ] _(Add relevant todos)_
 
 ## Community discovery
 
@@ -76,8 +83,9 @@
 - [x] Label propagation
 - [_] Mutual information
 
-#### Metrics to evaluate communities
-- [x] Modularity 
+### Metrics to evaluate communities
+
+- [x] Modularity
 - [x] Coverage
 - [x] Performance
 
@@ -85,14 +93,17 @@
 
 - [ ] _(Add relevant methods here)_
 
+### Summary of the findings
+
+- [ ] _(Add relevant todos)_
+
 _(Note that there might be additional sections added to here)_
 
 ## Other
 
-- [ ] make helperfunction to produce metadata about computationally heavy runs 
+- [ ] make helperfunction to produce metadata about computationally heavy runs
 - [ ] after done: rerun those computations and produce the metadata
 - [ ] move projection methods into csripts (?)
-
 
 ## Visualisation
 

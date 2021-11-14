@@ -10,16 +10,13 @@
 
 ## Ideas/Notes to the readings
 
-### Comunnity Discovery 1
-
-
 ### Basics
 
 #### Chapter 2
 
 - Talks about probability theory to make inferences about uncertain events
 
-- Mentions frequenist approach and bayesian approach 
+- Mentions frequenist approach and bayesian approach
 
 - Markov processes which are sotchastic processes (changes over time)
 
@@ -28,7 +25,6 @@
 #### Chapter 3 simple graphs
 
 - Introduction to the different graphs
-
 
 #### Chapter 4 Extended graphs
 
@@ -68,7 +64,7 @@
 
 - a networks density is defined by number of edges divided by number of total possible edges
 
-- introduces clustering coefficient trasitivity (global, local and average) 
+- introduces clustering coefficient trasitivity (global, local and average)
 
 - usually networks have very high clustering
 
@@ -102,13 +98,11 @@
 
 - random graphs have a binominal distribution which is different to real world graphs as their neighbours often have corelation
 
-
 #### Chapter 14 Understanding network properties
 
 - explaining high clustering and small diameters in the real world by using Watts and Strogatz real world model, and clustering with the cave man graph
 
 - using preferential attachment model, link selection or copying models to explain power law degree distributions (watch out for the preferential attachment models node age correlation)
-
 
 #### Chapter 15 Generating realistic data
 
@@ -128,7 +122,7 @@
 
 #### Chapter 17 Epidemics
 
-- introduces the SI, SIS and the SIR model (Susceptible, Infected, Removed) 
+- introduces the SI, SIS and the SIR model (Susceptible, Infected, Removed)
 
 #### Chapter 18 Complex contagion
 
@@ -166,7 +160,6 @@
 
 - explaining precision (returning only true positives at the price of missing some), recall (returning all positive results at the price of returning lots of false positives) and the precision recall curves with the objective to maximise the AUC
 
-
 ### The hairball
 
 #### Chapter 23 Bipartite projections
@@ -177,7 +170,7 @@
 
 - in network projections for bipartite networks one of the node types is picked and connected with the nodes that have a common neighbour of the other node type.
 
-- since bipartite networks  often have broadly distributed degrees, the projections can easily become close to one fully connected clique, which you need a weighting scheme to remove weak components
+- since bipartite networks often have broadly distributed degrees, the projections can easily become close to one fully connected clique, which you need a weighting scheme to remove weak components
 
 - weighting sceme could be standard vector distances (cosine, euclidiean, correlation) or more specialized network-aware techniques such as hyperbolic (considering nodes as allocating resources to their neighbors, inversely proportional to the number of neighbors they have)
 
@@ -203,7 +196,7 @@
 
 - Network sampling is a necessary operation if you have a very large amount of data or if you collect it from an API with high latency where you can only collect 1 node at a time. Sampling is not necessary if you collect a sample made by somebody else.
 
-    - The objective of network sampling is to get a network sample that can represent the whole network to check certain properties of the network, an example could be to check whether or not it has a comparable degree distribution (if it is a power law)
+  - The objective of network sampling is to get a network sample that can represent the whole network to check certain properties of the network, an example could be to check whether or not it has a comparable degree distribution (if it is a power law)
 
 - the different types of network sampling methods can be induced (extract a random sample of nodes/edges and collect all that is attached) or topological (exploring the structure one node at a time)
 
@@ -211,8 +204,7 @@
 
 - when collecting data be wary of the edges per second as it can give a false indication of the speed in which data is collected
 
-
-### Mesoscale 
+### Mesoscale
 
 #### Chapter 26 Homophily
 
@@ -234,7 +226,6 @@
 
 - introduces the friendship paradox ("my friends have more friends than me" and implies that you are less happy than your friends)
 
-
 #### Chapter 28 Core-Periphery
 
 - A core-periphery structure is a meso-level organisation of complex networks in 2 parts, one being the core, a set of nodes densely connected. The other being the periphery which has a set of nodes with few connections to the core.
@@ -244,6 +235,8 @@
 - Core-periphery structures are ubiquitous (constantly encountered/widespread) and a pure core-periphery structure is incompatible with others such as the notion of communities, in reality however they are co-existing.
 
 - Nestedness in ecology and economics is a classical core-periphery structure for bipartite networks.
+
+### Comunnity Discovery 1
 
 #### Chapter 29 Hierachies
 
