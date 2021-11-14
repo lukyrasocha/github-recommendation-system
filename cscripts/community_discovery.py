@@ -1,9 +1,9 @@
-#Community discovery on backboning
+# Community discovery on backboning
 import networkx as nx
 import pandas as pd
 
 
-def CD_unipartite(Graph, method = 'label_prop_semi',weight_name='score'):
+def CD_unipartite(Graph, method='label_prop_semi', weight_name='score'):
     """
     method options = ['label_prop_semi','label_prop_asyn','max_modularity','random_walk']
     'label_prop_asyn'
@@ -31,7 +31,7 @@ Greedy modularity maximization begins with each node in its own community and jo
 
     if method == 'label_prop_semi':
         return community.label_propagation_communities(Graph)
-        #return community.asyn_lpa_communities(Graph)
+        # return community.asyn_lpa_communities(Graph)
 
     elif method == 'label_prop_asyn':
         return community.asyn_lpa_communities(Graph)
@@ -42,13 +42,11 @@ Greedy modularity maximization begins with each node in its own community and jo
     elif method == 'random_walk':
         return algorithms.walktrap(Graph)
 
-    elif method =='louvain':
+    elif method == 'louvain':
         return algorithms.louvain(Graph, weight=weight_name, resolution=1., randomize=False)
-    
-    
-    
-    
-def Partition_measure(Graph,communities,method = 'modularity',weight_name='score'):
+
+
+def Partition_measure(Graph, communities, method='modularity', weight_name='score'):
     """
     METHODS
     modularity
@@ -71,7 +69,7 @@ def Partition_measure(Graph,communities,method = 'modularity',weight_name='score
         """
         If resolution is less than 1, modularity favors larger communities. Greater than 1 favors smaller communities.
         """
-        return community.modularity(Graph, communities,weight=weight_name,resolution=1)
+        return community.modularity(Graph, communities, weight=weight_name, resolution=1)
 
     elif method == 'coverage':
         return community.quality.coverage(Graph, communities)
@@ -80,29 +78,22 @@ def Partition_measure(Graph,communities,method = 'modularity',weight_name='score
         return community.quality.performance(Graph, communities)
 
 
-
-
 if __name__ == '__main__':
 
-    #Read graph
+    # Read graph
     edge_list = pd.read_csv('../data/backboning/df_table_simple_weight.csv')
-    G = nx.from_pandas_edgelist(edge_list,'src','trg', edge_attr='score')
+    G = nx.from_pandas_edgelist(edge_list, 'src', 'trg', edge_attr='score')
 
-    comm = CD_unipartite(G,method='label_prop_semi')
+    comm = CD_unipartite(G, method='label_prop_semi')
 
-    print("Moduarity: ",Partition_measure(G,comm))
+    print("Moduarity: ", Partition_measure(G, comm))
 
-    #print(G.edges(data=True))
+    # print(G.edges(data=True))
     #G2 = nx.karate_club_graph()
-    #print(G.get_edge_data('r1','r1111').get('score',1))
+    # print(G.get_edge_data('r1','r1111').get('score',1))
 
-    #Print communities
+    # Print communities
     #print(list(CD_unipartite(G, method='random_walk')))
 
-    #Quality measure
+    # Quality measure
     #print('Quality:', Partition_measure(G,CD_unipartite(G, method='label_prop_semi'),method='modularity'))
-
-
-
-
-
