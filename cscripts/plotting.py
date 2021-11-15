@@ -21,7 +21,7 @@ import networkx as nx
 from tqdm import tqdm
 import powerlaw as pl
 
-from metrics import get_degrees
+import metrics
 
 # global settings
 sns.set_style("darkgrid")
@@ -145,6 +145,18 @@ def plot_ccdfs_degrees(*degrees, names=None, fit=True, figsize=(5,5)):
 
     return fig
 
+def plot_edge_weight_distribution(edge_weights, name='untitled', log=True, figsize=(5,5)):
+    fig, ax = plt.subplots(figsize=figsize)
+    sns.set_context(rc = {'patch.linewidth': 0.0})
+    uniques, count = np.unique(edge_weights, return_counts=True)
+    if log: count = np.log10(count)
+    sns.barplot(x=uniques, y=count, palette='rocket', ax=ax)
+    ax.set(xticklabels=[])
+    ax.set(xlabel='Edge Weights', ylabel='Count (log-scale)')
+    ax.set(title=f"Edge Weight Distribution of {name.replace('_', ' ').title()}")
+
+    return fig
+
 
 def generate_plots(G, name, filepath='.', create_path=True):
     if create_path:
@@ -162,17 +174,19 @@ def generate_plots(G, name, filepath='.', create_path=True):
 
 if __name__ == '__main__':
     # test code
-    G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
+    G = nx.read_gpickle('../data/projections/pickle_format/jaccard.pickle')
     #G = nx.read_edgelist(f"../data/transformed/data.txt", delimiter=",", comments='#', create_using=nx.Graph)
     #degrees = [G.degree(node) for node in G.nodes() if node[0]=='r']
     #G2 = nx.read_gpickle('../data/projections/pickle_format/heats.pickle')
 
     #G = nx.karate_club_graph()
-    G2 = nx.karate_club_graph()
+    #G2 = nx.karate_club_graph()
+    print(metrics.number_of_edges(G))
 
-    degrees = get_degrees(G)
-    degrees2 = get_degrees(G2)
+    edge_weights = [edge[-1]['weight'] for edge in G.edges(data=True)]
+    print(np.unique(edge_weights))
 
     #fig = plot_degree_distribution(degrees, degrees2, names=['test1', 'test2'], scales=['linear', 'log'])
-    fig = plot_ccdfs_degrees(degrees, names=['Users '], fit=[False, True])
+    #fig = plot_ccdfs_degrees(degrees, names=['Users '], fit=[False, True])
+    fig = plot_edge_weight_distribution(edge_weights, name='Jaccard', log=False)
     plt.show()
