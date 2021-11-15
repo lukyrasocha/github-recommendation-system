@@ -49,51 +49,43 @@ def plot_single_degree_distribution(degrees, name='', ax=None, figsize=(5,5), sc
 
     return ax
 
-def plot_degree_distribution(*degrees, names=None, figsize=(5, 5), scale='linear'):
-    if type(scale) == str:
-        scale = [scale]
+def plot_degree_distribution(*degrees, names=None, scales='linear', figsize=(5,5)):
     if names == None:
         names = ['Unnamed' for _ in range(len(degrees))]
+    if type(scales) == str:
+        scales = [scales]
 
-    n_rows = len(degrees)
-    n_cols = len(scale)
+    # initialising subplots figure
+    n_rows = len(scales)
+    n_cols = len(degrees)
 
-    fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, figsize=(figsize[0]*n_cols, figsize[1]*n_rows))
+    fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, figsize=(figsize[0]*n_cols, figsize[1]*n_rows), 
+                            constrained_layout=True)
 
-    if n_rows > 1 and n_cols > 1:
-        for h_ax, s in zip(axs, scale):
-            for ax, degree, name in zip(h_ax, degrees, names):
-                fig = plot_single_degree_distribution(degree, name, 
-                                                      figsize=figsize, 
-                                                      ax=ax, 
-                                                      scale=s)
+    # formatting axes array
+    axs = np.array(axs)
+    if n_rows > 1 and n_cols==1:
+        axs = axs.reshape(-1, 1)
+    elif n_rows == 1 and n_cols > 1:
+        axs = axs.reshape(1, -1)
+    elif n_rows == 1 and n_cols == 1:
+        axs = axs.reshape(1, 1)
 
-    elif n_rows > 1:
-        for ax, degree, name in zip(axs, degrees, names):
+
+    for i, s in zip(range(n_rows), scales):
+        for j, degree, name in zip(range(n_cols), degrees, names):
             fig = plot_single_degree_distribution(degree, name, 
                                                   figsize=figsize, 
-                                                  ax=ax, 
-                                                  scale=scale)
-
-    elif n_cols > 1:
-        for ax, s in zip(axs, scale):
-            fig = plot_single_degree_distribution(degrees[0], names[0], 
-                                                  figsize=figsize, 
-                                                  ax=ax, 
+                                                  ax=axs[i][j], 
                                                   scale=s)
-
-    else:
-        fig = plot_single_degree_distribution(degrees[0], names[0], 
-                                              figsize=figsize,
-                                              ax=axs, 
-                                              scale=scale)
 
     return fig
 
 
 
-def generate_plots(G, name, filepath='.'):
-    os.makedirs(filepath) if not os.path.exists(filepath) else None
+def generate_plots(G, name, filepath='.', create_path=True):
+    if create_path:
+        os.makedirs(filepath) if not os.path.exists(filepath) else None
 
     names = ['degree_distribution']
     funcs = [plot_degree_distribution]
@@ -115,9 +107,9 @@ if __name__ == '__main__':
     G = nx.karate_club_graph()
     G2 = nx.karate_club_graph()
 
-    degrees = metrics.get_degrees(G)
-    degrees2 = metrics.get_degrees(G2)
+    degrees = get_degrees(G)
+    degrees2 = get_degrees(G2)
+    degrees3 = get_degrees(G2)
 
-    fig = plot_degree_distribution(degrees, degrees2,
-                                   scale=['linear', 'log'])
+    fig = plot_degree_distribution(degrees, degrees2, names=['test1', 'test2'], scales=['linear', 'log'])
     plt.show()

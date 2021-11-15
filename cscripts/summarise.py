@@ -23,7 +23,7 @@ from metrics import export_metrics
 from plotting import generate_plots
 
 
-def generate_markdown(G, filepath, name='unnamed', save_name=None, plain=True):
+def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=True):
     if save_name == None:
         save_name = name
 
@@ -75,6 +75,17 @@ def generate_pdf(filepath, name, save_name=None):
         html_text = markdown(f.read(), output_format='html4')
 
     pdfkit.from_string(html_text, f'{filepath}/{name}/{save_name}.pdf')
+
+def write_metadata(metadata, filepath='.', name):
+    filepath = f"{filepath}/{name}.txt"
+    with open(filepath, 'w') as outfile:
+        outfile.write('=== METADATA: Backboning ===\n\n\n')
+        for method in metadata:
+            outfile.write(f"Method: {method.replace('_', ' ').title()}\n")
+            outfile.write(f"{'-'*len(method)}\n")
+            for stat, res in metadata[method].items():
+                outfile.write(f"{stat.replace('_', ' ').title()}: {res}\n")
+            outfile.write('\n')
 
 def generate_summary(G, filepath, name='unnamed'):
     generate_markdown(G, filepath, name=name, save_name=name+'_plain', plain=True)

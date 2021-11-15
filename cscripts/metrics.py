@@ -20,7 +20,7 @@ if local_path not in sys.path:
 from handle_timeout import * 
 
 #--- GLOBAL SETUP 
-STOP_EXECUTION = 15 
+STOP_EXECUTION = 10 
 np.set_printoptions(suppress=True)
 
 
