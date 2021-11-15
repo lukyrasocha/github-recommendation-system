@@ -66,4 +66,3 @@ Computation Time: 1.46sec
 ## Ccdf Degree Distribution Plot
 ---
 ![image](./data/graph_summaries/karate/assets/ccdf_degree_distribution.jpg)
-
