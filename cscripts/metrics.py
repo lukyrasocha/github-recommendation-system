@@ -96,6 +96,25 @@ def get_ccs(G):
     return [G.subgraph(cc) for cc in nx.connected_components(G)]
 
 
+@break_after(STOP_EXECUTION)
+def get_edge_weights(G):
+    """
+    Function to extract an iterable of all edge_weights from a 
+    nx.Graph object. 
+
+    Function Arguments 
+    ------------------
+    G : nx.Graph                |   Graph 
+
+    Returns
+    -------
+    edge_weights : iterable(float) |   Iterable of edge weights 
+    """
+    if 'weight' not in list(G.edges(data=True))[0][-1]:
+        return None
+    return [edge[-1]['weight'] for edge in G.edges(data=True)] 
+
+
 
 #--- SINGLE NETWORK METRICS
 
@@ -173,8 +192,13 @@ def global_diameter(G):
         return nx.diameter(G)
     else: return 'No Global Diameter (Unconnected Graph)'
 
+# edge weights statistics
+@break_after(STOP_EXECUTION)
+def average_edge_weight(edge_weights):
+    return np.mean(edge_weights) if edge_weights else None
 
-
+def summarise_edge_weights(edge_weights):
+    return five_num_summary(edge_weights) if edge_weights else None
 
 # degree statistics
 @break_after(STOP_EXECUTION)
@@ -191,7 +215,7 @@ def average_degree(degrees):
     average_degree : float      |   Average Degree 
     """
 
-    return np.mean(degrees)
+    return np.mean(degrees) if degrees else None
 
 @break_after(STOP_EXECUTION)
 def summarise_degrees(degrees):
@@ -208,7 +232,7 @@ def summarise_degrees(degrees):
     summary : np.array(5)       |   Five-Num-Summary of Degrees 
     """
 
-    return five_num_summary(degrees)
+    return five_num_summary(degrees) if degrees else None
 
 
 
@@ -228,7 +252,7 @@ def average_lcc(lccs):
     average_lcc : float         |   Average LCC 
     """
 
-    return np.mean(lccs)
+    return np.mean(lccs) if lccs else None
 
 @break_after(STOP_EXECUTION)
 def summarise_lcc(lccs):
@@ -246,7 +270,7 @@ def summarise_lcc(lccs):
     summary : np.array(5)       |   Five-Num-Summary of LCCs
     """
 
-    return five_num_summary(lccs)
+    return five_num_summary(lccs) if lccs else None
 
 
 
@@ -266,7 +290,7 @@ def number_of_ccs(ccs):
     #ccs : int                  |  Number of CCs 
     """
 
-    return len(ccs)
+    return len(ccs) if ccs else None
 
 @break_after(STOP_EXECUTION)
 def average_cc_size(ccs):
@@ -283,7 +307,7 @@ def average_cc_size(ccs):
     average_size : float        |  Average Size of CCs
     """
 
-    return np.mean([cc.number_of_nodes() for cc in ccs])
+    return np.mean([cc.number_of_nodes() for cc in ccs]) if ccs else None
 
 @break_after(STOP_EXECUTION)
 def summarise_cc_size(ccs):
@@ -300,7 +324,7 @@ def summarise_cc_size(ccs):
     summary : np.array(5)       |   Five-Num-Summary of CC Sizes
     """
 
-    return five_num_summary([cc.number_of_nodes() for cc in ccs])
+    return five_num_summary([cc.number_of_nodes() for cc in ccs]) if ccs else None
 
 @break_after(STOP_EXECUTION)
 def average_cc_density(ccs):
@@ -316,7 +340,7 @@ def average_cc_density(ccs):
     average_density : float     |   Average Density among all CCs
     """
 
-    return np.mean([nx.density(cc) for cc in ccs])
+    return np.mean([nx.density(cc) for cc in ccs]) if ccs else None
 
 @break_after(STOP_EXECUTION)
 def summarise_cc_density(ccs):
@@ -331,7 +355,7 @@ def summarise_cc_density(ccs):
     -------
     summary : np.array(5)       |   Five-Num-Summary of Densities among all CCs
     """
-    return five_num_summary([nx.density(cc) for cc in ccs])
+    return five_num_summary([nx.density(cc) for cc in ccs]) if ccs else None
 
 @break_after(STOP_EXECUTION)
 def average_diameter(ccs):
@@ -347,7 +371,7 @@ def average_diameter(ccs):
     average_diameter : float     |   Average Diameter among all CCs
     """
 
-    return np.mean([nx.diameter(cc) for cc in ccs])
+    return np.mean([nx.diameter(cc) for cc in ccs]) if ccs else None
 
 @break_after(STOP_EXECUTION)
 def summarise_diameter(ccs):
@@ -362,7 +386,7 @@ def summarise_diameter(ccs):
     -------
     summary : np.array(5)       |   Five-Num-Summary of diameters among all CCs
     """
-    return five_num_summary([nx.diameter(cc) for cc in ccs])
+    return five_num_summary([nx.diameter(cc) for cc in ccs]) if ccs else None
 
 
 
@@ -411,6 +435,7 @@ def export_metrics(G):
     degrees = get_degrees(G)
     lccs = get_lccs(G)
     ccs = get_ccs(G)
+    edge_weights = get_edge_weights(G)
 
     return {'Basic Statistics': 
                  {
@@ -425,18 +450,23 @@ def export_metrics(G):
                 'Average Degree': f'{round(average_degree(degrees), 2)}',
                 'Five-Number-Summary Degrees': summarise_degrees(degrees)
                 },
+            'Edge Weight Statistics':
+                {
+                'Average Edge Weight': average_edge_weight(edge_weights),
+                'Five-Number-Summary Edge Weights': summarise_edge_weights(edge_weights)
+                },
             'Clustering Statistics':
                 {
-                'Average LCC': f'{round(average_lcc(lccs), 2) if lccs else None}',
-                'Five-Number-Summary LCC': summarise_lcc(lccs) if lccs else None
+                'Average LCC': f'{round(average_lcc(lccs), 2)}',
+                'Five-Number-Summary LCC': summarise_lcc(lccs)
                 },
             'Connected Components Statistics': 
                 {
-                 'Number of CC': number_of_ccs(ccs) if ccs else None, 
-                 'Average CC Size': f'{round(average_cc_size(ccs), 2) if ccs else None}', 
-                 'Five-Number-Summary of CC Sizes': summarise_cc_size(ccs) if ccs else None,
-                 'Average CC Density': average_cc_density(ccs) if ccs else None,
-                 'Five-Number-Summary of CC Densities': summarise_cc_density(ccs) if ccs else None
+                 'Number of CC': number_of_ccs(ccs), 
+                 'Average CC Size': f'{round(average_cc_size(ccs), 2)}', 
+                 'Five-Number-Summary of CC Sizes': summarise_cc_size(ccs),
+                 'Average CC Density': f'{round(average_cc_density(ccs), 2)}',
+                 'Five-Number-Summary of CC Densities': summarise_cc_density(ccs)
                 },
             'Centrality Statistics':
                 {
@@ -453,5 +483,4 @@ if __name__ == '__main__':
     end = time.time()
     print(f'Finished Reading in {end-start}s')
 
-    print(degree_centrality(G, 10))
-    print(betweenness_centrality(G, 10))
+    print(export_metrics(G))
