@@ -68,14 +68,6 @@ def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=Tru
         outfile.write(s)
 
 
-def generate_pdf(filepath, name, save_name=None):
-    if not save_name:
-        save_name=name
-    with open(f'{filepath}/{name}/{save_name}.md', 'r') as f:
-        html_text = markdown(f.read(), output_format='html4')
-
-    pdfkit.from_string(html_text, f'{filepath}/{name}/{save_name}.pdf')
-
 def write_metadata(metadata, filepath='.', name):
     filepath = f"{filepath}/{name}.txt"
     with open(filepath, 'w') as outfile:
