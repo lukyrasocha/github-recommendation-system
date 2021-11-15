@@ -1,7 +1,7 @@
 # Generic Summary of Unipartite Graph **Karate**
 ---
-Created: 10/11/21
-Computation Time: 0.62sec
+Created: 15/11/21
+Computation Time: 1.55sec
 
 ## Basic Statistics
 ---
@@ -16,6 +16,12 @@ Computation Time: 0.62sec
 |---|---|
 | Average Degree | 4.59 |
 | Five-Number-Summary Degrees | [ 1.  2.  3.  5. 17.] |
+## Edge Weight Statistics
+---
+| Network Statistics | Results |
+|---|---|
+| Average Edge Weight | None |
+| Five-Number-Summary Edge Weights | None |
 ## Clustering Statistics
 ---
 | Network Statistics | Results |
@@ -29,7 +35,7 @@ Computation Time: 0.62sec
 | Number of CC | 1 |
 | Average CC Size | 34.0 |
 | Five-Number-Summary of CC Sizes | [34. 34. 34. 34. 34.] |
-| Average CC Density | 0.13903743315508021 |
+| Average CC Density | 0.14 |
 | Five-Number-Summary of CC Densities | [0.13903743 0.13903743 0.13903743 0.13903743 0.13903743] |
 ## Centrality Statistics
 ---
@@ -39,4 +45,13 @@ Computation Time: 0.62sec
 | Betweenness Centrality | [0, 33, 32, 2, 31, 8, 1, 13, 19, 5] |
 ## Degree Distribution Plot
 ---
-![image](./assets/degree_distribution.jpg)
+![image](./data/graph_summaries/karate/assets/degree_distribution.jpg)
+
+## Edge Weight Distribution Plot
+---
+![image](./data/graph_summaries/karate/assets/edge_weight_distribution.jpg)
+
+## Ccdf Degree Distribution Plot
+---
+![image](./data/graph_summaries/karate/assets/ccdf_degree_distribution.jpg)
+

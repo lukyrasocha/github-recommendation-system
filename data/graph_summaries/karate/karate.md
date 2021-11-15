@@ -1,7 +1,7 @@
 # Generic Summary of Unipartite Graph **Karate**
 ---
-Created: 10/11/21
-Computation Time: 0.3sec
+Created: 15/11/21
+Computation Time: 1.46sec
 
 ## Basic Statistics
 ---
@@ -20,6 +20,14 @@ Computation Time: 0.3sec
 <tr><td>Five-Number-Summary Degrees</td><td>[ 1.  2.  3.  5. 17.]</td></tr>
 </table>
 
+## Edge Weight Statistics
+---
+<table>
+<tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
+<tr><td>Average Edge Weight</td><td>None</td></tr>
+<tr><td>Five-Number-Summary Edge Weights</td><td>None</td></tr>
+</table>
+
 ## Clustering Statistics
 ---
 <table>
@@ -35,7 +43,7 @@ Computation Time: 0.3sec
 <tr><td>Number of CC</td><td>1</td></tr>
 <tr><td>Average CC Size</td><td>34.0</td></tr>
 <tr><td>Five-Number-Summary of CC Sizes</td><td>[34. 34. 34. 34. 34.]</td></tr>
-<tr><td>Average CC Density</td><td>0.13903743315508021</td></tr>
+<tr><td>Average CC Density</td><td>0.14</td></tr>
 <tr><td>Five-Number-Summary of CC Densities</td><td>[0.13903743 0.13903743 0.13903743 0.13903743 0.13903743]</td></tr>
 </table>
 
@@ -49,4 +57,13 @@ Computation Time: 0.3sec
 
 ## Degree Distribution Plot
 ---
-![image](./assets/degree_distribution.jpg)
+![image](./data/graph_summaries/karate/assets/degree_distribution.jpg)
+
+## Edge Weight Distribution Plot
+---
+![image](./data/graph_summaries/karate/assets/edge_weight_distribution.jpg)
+
+## Ccdf Degree Distribution Plot
+---
+![image](./data/graph_summaries/karate/assets/ccdf_degree_distribution.jpg)
+
