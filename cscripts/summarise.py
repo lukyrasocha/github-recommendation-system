@@ -11,9 +11,6 @@ from time import time
 from datetime import date
 import networkx as nx
 
-from markdown import markdown
-import pdfkit
-
 local_path = os.path.dirname(os.path.realpath(__file__))
 if local_path not in sys.path:
     sys.path.append(local_path)
@@ -71,7 +68,7 @@ def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=Tru
 def write_metadata(metadata, filepath='.', name='untitled'):
     filepath = f"{filepath}/{name}.txt"
     with open(filepath, 'w') as outfile:
-        outfile.write('=== METADATA: Backboning ===\n\n\n')
+        outfile.write('=== METADATA: {name.replace('_', ' ')} ===\n\n\n')
         for method in metadata:
             outfile.write(f"Method: {method.replace('_', ' ').title()}\n")
             outfile.write(f"{'-'*len(method)}\n")
