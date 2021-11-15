@@ -101,9 +101,17 @@ _(Note that there might be additional sections added to here)_
 
 ## Other
 
-- [ ] make helperfunction to produce metadata about computationally heavy runs
-- [ ] after done: rerun those computations and produce the metadata
+- [x] make helperfunction to produce metadata about computationally heavy runs
+- [x] after done: rerun those computations and produce the metadata
+  - [x] projections
+  - [ ] summary of projections (fix some bugs, see below)
+        -> Fix plotting of edge weight distribution (sort by value in counter dict)
+  - [ ] backboned graphs
+  - [ ] summary of backboned graphs
+
 - [ ] move projection methods into csripts (?)
+
+
 
 ## Visualisation
 
