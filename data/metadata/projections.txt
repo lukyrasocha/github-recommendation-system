@@ -1,0 +1,48 @@
+=== METADATA: Projections ===
+
+
+Method: Simple Weight
+-------------
+Date: 15/11/21
+Time: 15:20:26
+Error: None
+Projected Time: 466.11
+Write Time: 22.32
+Success: True
+
+Method: Jaccard
+-------
+Date: 15/11/21
+Time: 15:28:34
+Error: None
+Projected Time: 1108.21
+Write Time: 40.4
+Success: True
+
+Method: Hyperbolic
+----------
+Date: 15/11/21
+Time: 15:47:43
+Error: None
+Projected Time: 2202.33
+Write Time: 147.63
+Success: True
+
+Method: Probs
+-----
+Date: 15/11/21
+Time: 16:26:53
+Error: None
+Projected Time: 1850.33
+Write Time: 74.36
+Success: True
+
+Method: Heats
+-----
+Date: 15/11/21
+Time: 16:58:58
+Error: None
+Projected Time: 2267.09
+Write Time: 73.82
+Success: True
+
