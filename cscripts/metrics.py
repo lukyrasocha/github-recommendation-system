@@ -1,7 +1,7 @@
 # metrics.py 
 # script holding function to analyse unipartite and bipartite networkx
 
-# last modified     : 09/11/21
+# last modified     : 15/11/21
 # author            : jonas-mika senghaas
 
 import os
@@ -20,7 +20,7 @@ if local_path not in sys.path:
 from handle_timeout import * 
 
 #--- GLOBAL SETUP 
-STOP_EXECUTION = 10 
+STOP_EXECUTION = 60 
 np.set_printoptions(suppress=True)
 
 
@@ -60,7 +60,7 @@ def get_degrees(G):
 
     return [degree for _, degree in G.degree()]
 
-@break_after(STOP_EXECUTION)
+@break_after(10)
 def get_lccs(G):
     """
     Function to extract an (unsorted) iterable of all local clustering
@@ -110,7 +110,7 @@ def get_edge_weights(G):
     -------
     edge_weights : iterable(float) |   Iterable of edge weights 
     """
-    if 'weight' not in list(G.edges(data=True))[0][-1]:
+    if not nx.is_weighted(G):
         return None
     return [edge[-1]['weight'] for edge in G.edges(data=True)] 
 
@@ -441,13 +441,13 @@ def export_metrics(G):
                  {
                  'Number of Nodes': number_of_nodes(G), 
                  'Number of Edges': number_of_edges(G), 
-                 'Global Density' : f'{round(global_density(G)*100, 2)}%'
+                 'Global Density' : global_density(G)
                     #'Global Diameter': global_diameter(G),
                     #'Average Diameter': f'{round(average_diameter(G), 2)}', 'Five-Number-Summary Diameter': summarise_diameter(G)}
                  },
             'Degree Statistics': 
                 {
-                'Average Degree': f'{round(average_degree(degrees), 2)}',
+                'Average Degree': average_degree(degrees),
                 'Five-Number-Summary Degrees': summarise_degrees(degrees)
                 },
             'Edge Weight Statistics':
@@ -457,15 +457,15 @@ def export_metrics(G):
                 },
             'Clustering Statistics':
                 {
-                'Average LCC': f'{round(average_lcc(lccs), 2)}',
+                'Average LCC': average_lcc(lccs),
                 'Five-Number-Summary LCC': summarise_lcc(lccs)
                 },
             'Connected Components Statistics': 
                 {
                  'Number of CC': number_of_ccs(ccs), 
-                 'Average CC Size': f'{round(average_cc_size(ccs), 2)}', 
+                 'Average CC Size': average_cc_size(ccs), 
                  'Five-Number-Summary of CC Sizes': summarise_cc_size(ccs),
-                 'Average CC Density': f'{round(average_cc_density(ccs), 2)}',
+                 'Average CC Density': average_cc_density(ccs),
                  'Five-Number-Summary of CC Densities': summarise_cc_density(ccs)
                 },
             'Centrality Statistics':
@@ -477,9 +477,9 @@ def export_metrics(G):
 
 
 if __name__ == '__main__':
-    # G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
     start = time.time()
-    G = nx.karate_club_graph()
+    G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
+    #G = nx.karate_club_graph()
     end = time.time()
     print(f'Finished Reading in {end-start}s')
 

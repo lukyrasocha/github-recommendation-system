@@ -1,11 +1,12 @@
 # plotting.py 
 # script holding function to analyse unipartite and bipartite networkx
 
-# last modified     : 09/11/21
+# last modified     : 15/11/21
 # author            : jonas-mika senghaas
 
 import os
 import sys
+from time import time
 from collections import Counter
 
 # allow imports locally (without referring to module structure)
@@ -107,7 +108,7 @@ def plot_single_ccdf_degrees(degrees, fit=True, name='', ax=None, figsize=(5,5),
 
     ax.set_xscale('log') 
     ax.set_yscale('log')
-    ax.set_xlim(data['k'].min()*0.8, data['k'].max()*1.2)
+    ax.set_xlim(10**0, data['k'].max())
 
     return ax
 
@@ -148,10 +149,14 @@ def plot_ccdfs_degrees(*degrees, names=None, fit=True, figsize=(5,5)):
 def plot_edge_weight_distribution(edge_weights, name='untitled', log=True, figsize=(5,5)):
     fig, ax = plt.subplots(figsize=figsize)
     sns.set_context(rc = {'patch.linewidth': 0.0})
-    uniques, count = np.unique(edge_weights, return_counts=True)
-    if log: count = np.log10(count)
-    sns.barplot(x=uniques, y=count, palette='rocket', ax=ax)
-    ax.set(xticklabels=[])
+    weights = sorted(Counter(edge_weights).items(), key=lambda x: x[1], reverse=True)
+    sns.scatterplot(x=[w for w, _ in weights], y=[c for _, c in weights], 
+                    palette='rocket', alpha=0.5, ax=ax)
+    if log:
+        ax.set(xscale='log', yscale='log')
+
+    #sns.histplot(edge_weights, stat='probability', ax=ax)
+    #ax.set(xticklabels=[])
     ax.set(xlabel='Edge Weights', ylabel='Count (log-scale)')
     ax.set(title=f"Edge Weight Distribution of {name.replace('_', ' ').title()}")
 
@@ -182,19 +187,23 @@ def generate_plots(G, name, filepath='.', create_path=True):
 
 if __name__ == '__main__':
     # test code
+    start = time()
     G = nx.read_gpickle('../data/projections/pickle_format/jaccard.pickle')
+    print('finished loading in ' + str(time() - start))
     #G = nx.read_edgelist(f"../data/transformed/data.txt", delimiter=",", comments='#', create_using=nx.Graph)
     #degrees = [G.degree(node) for node in G.nodes() if node[0]=='r']
     #G2 = nx.read_gpickle('../data/projections/pickle_format/heats.pickle')
 
     #G = nx.karate_club_graph()
     #G2 = nx.karate_club_graph()
-    print(metrics.number_of_edges(G))
 
-    edge_weights = [edge[-1]['weight'] for edge in G.edges(data=True)]
-    print(np.unique(edge_weights))
+    start = time()
+    edge_weights = metrics.get_edge_weights(G)
+    #edge_weights = [edge[-1]['weight'] for edge in G.edges(data=True)]
+    print('finished computing edge weights in ' + str(time() - start))
+    #print(np.unique(edge_weights))
 
     #fig = plot_degree_distribution(degrees, degrees2, names=['test1', 'test2'], scales=['linear', 'log'])
-    #fig = plot_ccdfs_degrees(degrees, names=['Users '], fit=[False, True])
-    fig = plot_edge_weight_distribution(edge_weights, name='Jaccard', log=False)
+    #fig = plot_ccdfs_degrees(metrics.get_degrees(G), fit=[False, True])
+    fig = plot_edge_weight_distribution(edge_weights, name='Jaccard', log=True)
     plt.show()

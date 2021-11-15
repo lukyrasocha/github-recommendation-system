@@ -2,7 +2,7 @@
 # file that contains code to generate complex summaries including all relevant network 
 # statistics and visualisation for a generic graph.
 
-# last modified: 09.11.21
+# last modified: 15.11.21
 # author: jonas-mika senghaas
 
 import os
@@ -68,7 +68,7 @@ def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=Tru
 def write_metadata(metadata, filepath='.', name='untitled'):
     filepath = f"{filepath}/{name}.txt"
     with open(filepath, 'w') as outfile:
-        outfile.write('=== METADATA: {name.replace('_', ' ')} ===\n\n\n')
+        outfile.write(f"=== METADATA: {name.replace('_', ' ').title()} ===\n\n\n")
         for method in metadata:
             outfile.write(f"Method: {method.replace('_', ' ').title()}\n")
             outfile.write(f"{'-'*len(method)}\n")
@@ -83,5 +83,5 @@ def generate_summary(G, filepath, name='unnamed'):
 
 if __name__ == '__main__':
     # test code
-    G = nx.karate_club_graph()
-    generate_summary(G, filepath='../data/graph_summaries', name='karate')
+    G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
+    generate_markdown(G, filepath='.', name='test', plain=False)
