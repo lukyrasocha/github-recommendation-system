@@ -138,3 +138,6 @@ data/backboned_thresholded
 
 # venv
 na-project
+
+# Github token
+cscripts/envvars.py
