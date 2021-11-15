@@ -49,4 +49,4 @@ Computation Time: 0.3sec
 
 ## Degree Distribution Plot
 ---
-![image](./assets/degree_distribution.jpg)
+![alt text](karate/assets/degree_distribution.jpg "Title")
