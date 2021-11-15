@@ -61,14 +61,14 @@ def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=Tru
     for file in os.listdir(f'{savepath}/assets'):
         title = file[:-4].replace('_', ' ').title()
         s += f'## {title} Plot\n---\n'
-        s += f'![image](./assets/{file})'
+        s += f'![image]({savepath}/assets/{file})\n\n'
 
     # write all string to markdown file
     with open(f'{savepath}/{save_name}.md', 'w') as outfile:
         outfile.write(s)
 
 
-def write_metadata(metadata, filepath='.', name):
+def write_metadata(metadata, filepath='.', name='untitled'):
     filepath = f"{filepath}/{name}.txt"
     with open(filepath, 'w') as outfile:
         outfile.write('=== METADATA: Backboning ===\n\n\n')
@@ -82,7 +82,6 @@ def write_metadata(metadata, filepath='.', name):
 def generate_summary(G, filepath, name='unnamed'):
     generate_markdown(G, filepath, name=name, save_name=name+'_plain', plain=True)
     generate_markdown(G, filepath, name=name, plain=False)
-    #generate_pdf(filepath, name)
 
 
 if __name__ == '__main__':

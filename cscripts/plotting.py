@@ -162,12 +162,20 @@ def generate_plots(G, name, filepath='.', create_path=True):
     if create_path:
         os.makedirs(filepath) if not os.path.exists(filepath) else None
 
-    names = ['degree_distribution']
-    funcs = [plot_degree_distribution]
+    names = ['degree_distribution', 'ccdf_degree_distribution', 'edge_weight_distribution']
+    funcs = [plot_degree_distribution, plot_ccdfs_degrees, plot_edge_weight_distribution]
+    
+    degrees = metrics.get_degrees(G)
+    edge_weights = metrics.get_edge_weights(G)
 
     for func_name, func in zip(names, funcs):
         if func_name == 'degree_distribution': 
-            fig = func(get_degrees(G), names=[name], scale=['linear', 'log'])
+            fig = func(degrees, names=[name], scales=['linear', 'log'])
+        elif func_name == 'ccdf_degree_distribution':
+            fig = func(degrees, names=[name], fit=[False, True])
+        elif func_name == 'edge_weight_distribution':
+            try: fig = func(edge_weights, name=name, log=True)
+            except: None
         
         plt.savefig(f'{filepath}/{func_name}.jpg')
 
