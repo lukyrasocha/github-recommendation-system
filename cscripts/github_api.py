@@ -97,7 +97,7 @@ class GithubApi:
 
 class ReposSummary(GithubApi):
 
-    def __init__(self, token, repositories, name, path) -> None:
+    def __init__(self, repositories, name, path, token=GITHUB_TOKEN) -> None:
 
         # Inherit from the parent class
         super().__init__(token)
