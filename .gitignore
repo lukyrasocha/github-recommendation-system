@@ -133,3 +133,6 @@ dmypy.json
 data/projections/pickle_format
 data/projections/edge_list_format
 data/backboning
+
+# venv
+na-project
