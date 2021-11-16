@@ -23,3 +23,37 @@
 - Save the token and put it into `cscripts/envvars.py` (If the file does not exist, create it) By putting I precisely mean declare a variable `GITHUB_TOKEN` and set it equal to your token
 
 - That is all. You do not need to worry, the token will stay locally since the .gitignore is supposed to ignore this file.
+
+## Folder structure
+Last Checked: 16. November 11:00
+`
+├───cscripts
+├───data
+│   ├───figures
+│   ├───graph_summaries
+│   │   ├───karate
+│   │   │   └───assets
+│   │   ├───original_bipartite
+│   │   │   └───assets
+│   │   └───projections
+│   │       ├───heats
+│   │       │   └───assets
+│   │       ├───hyperbolic
+│   │       │   └───assets
+│   │       ├───jaccard
+│   │       │   └───assets
+│   │       ├───probs
+│   │       │   └───assets
+│   │       └───simple_weight
+│   │           └───assets
+│   ├───metadata
+│   ├───raw
+│   ├───recommend_summary
+│   └───transformed
+├───other
+│   └───.ipynb_checkpoints
+├───project_info
+├───recommendations
+│   └───simple_weight
+└───scripts
+`
