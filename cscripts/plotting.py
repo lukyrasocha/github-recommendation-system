@@ -1,7 +1,7 @@
 # plotting.py 
 # script holding function to analyse unipartite and bipartite networkx
 
-# last modified     : 15/11/21
+# last modified     : 16/11/21
 # author            : jonas-mika senghaas
 
 import os

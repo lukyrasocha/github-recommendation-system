@@ -1,13 +1,14 @@
 # metrics.py 
 # script holding function to analyse unipartite and bipartite networkx
 
-# last modified     : 15/11/21
+# last modified     : 16/11/21
 # author            : jonas-mika senghaas
 
 import os
 import sys
 import time
 from datetime import date
+from collections import Counter
 import numpy as np
 import pandas as pd
 import networkx as nx
@@ -197,8 +198,17 @@ def global_diameter(G):
 def average_edge_weight(edge_weights):
     return np.mean(edge_weights) if edge_weights else None
 
+@break_after(STOP_EXECUTION)
 def summarise_edge_weights(edge_weights):
     return five_num_summary(edge_weights) if edge_weights else None
+
+@break_after(STOP_EXECUTION)
+def variance_edge_weights(edge_weights):
+    return np.var(edge_weights) if edge_weights else None
+
+@break_after(STOP_EXECUTION)
+def most_frequent_edge_weight(edge_weights):
+    return Counter(edge_weights).most_common()[0][0] if edge_weights else None
 
 # degree statistics
 @break_after(STOP_EXECUTION)
@@ -408,7 +418,7 @@ def degree_centrality(G, n):
     return [x[0] for x in sorted([item for item in nx.algorithms.centrality.degree_centrality(G).items()], 
                 key=lambda item: item[1], reverse=True)[:n]]
 
-@break_after(STOP_EXECUTION)
+@break_after(10)
 def betweenness_centrality(G, n):
     """
     Returns the n nodes with highest betweenness centrality 
@@ -441,8 +451,8 @@ def export_metrics(G):
                  {
                  'Number of Nodes': number_of_nodes(G), 
                  'Number of Edges': number_of_edges(G), 
-                 'Global Density' : global_density(G)
-                    #'Global Diameter': global_diameter(G),
+                 'Global Density' : global_density(G),
+                 'Global Diameter': global_diameter(G)
                     #'Average Diameter': f'{round(average_diameter(G), 2)}', 'Five-Number-Summary Diameter': summarise_diameter(G)}
                  },
             'Degree Statistics': 
@@ -453,7 +463,9 @@ def export_metrics(G):
             'Edge Weight Statistics':
                 {
                 'Average Edge Weight': average_edge_weight(edge_weights),
-                'Five-Number-Summary Edge Weights': summarise_edge_weights(edge_weights)
+                'Five-Number-Summary Edge Weights': summarise_edge_weights(edge_weights),
+                'Variance of Edge Weights': variance_edge_weights(edge_weights),
+                'Most Frequent Edge Weight': most_frequent_edge_weight(edge_weights)
                 },
             'Clustering Statistics':
                 {
