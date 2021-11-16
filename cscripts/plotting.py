@@ -146,19 +146,45 @@ def plot_ccdfs_degrees(*degrees, names=None, fit=True, figsize=(5,5)):
 
     return fig
 
-def plot_edge_weight_distribution(edge_weights, name='untitled', log=True, figsize=(5,5)):
-    fig, ax = plt.subplots(figsize=figsize)
+def plot_single_edge_weight_distribution(edge_weights, name='untitled', ax=None, log=True, figsize=(5,5)):
+    if ax == None:
+        fig, ax = plt.subplots(figsize=figsize)
     sns.set_context(rc = {'patch.linewidth': 0.0})
-    weights = sorted(Counter(edge_weights).items(), key=lambda x: x[1], reverse=True)
-    sns.scatterplot(x=[w for w, _ in weights], y=[c for _, c in weights], 
-                    palette='rocket', alpha=0.5, ax=ax)
-    if log:
-        ax.set(xscale='log', yscale='log')
 
-    #sns.histplot(edge_weights, stat='probability', ax=ax)
-    #ax.set(xticklabels=[])
-    ax.set(xlabel='Edge Weights', ylabel='Count (log-scale)')
+    sns.histplot(edge_weights, bins=20, kde=True, log_scale=log, ax=ax)
+    ax.set(xlabel='Edge Weights', ylabel='Frequency')
     ax.set(title=f"Edge Weight Distribution of {name.replace('_', ' ').title()}")
+
+    return ax
+
+def plot_edge_weight_distributions(*edge_weights, names=None, log=True, figsize=(5,5)):
+    if names == None:
+        names = ['Unnamed' for _ in range(len(degrees))]
+    if type(log) == bool:
+        log = [log]
+
+    # initialising subplots figure
+    n_rows = len(edge_weights)
+    n_cols = len(log)
+
+    fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, figsize=(figsize[0]*n_cols, figsize[1]*n_rows), constrained_layout=True)
+
+    # formatting axes array
+    axs = np.array(axs)
+    if n_rows > 1 and n_cols==1:
+        axs = axs.reshape(-1, 1)
+    elif n_rows == 1 and n_cols > 1:
+        axs = axs.reshape(1, -1)
+    elif n_rows == 1 and n_cols == 1:
+        axs = axs.reshape(1, 1)
+
+
+    for i, edge_weight, name in zip(range(n_rows), edge_weights, names):
+        for j, l in zip(range(n_cols), log):
+            fig = plot_single_edge_weight_distribution(edge_weight, 
+                                                       name=name, 
+                                                       ax=axs[i][j],
+                                                       log=l)
 
     return fig
 
@@ -205,5 +231,5 @@ if __name__ == '__main__':
 
     #fig = plot_degree_distribution(degrees, degrees2, names=['test1', 'test2'], scales=['linear', 'log'])
     #fig = plot_ccdfs_degrees(metrics.get_degrees(G), fit=[False, True])
-    fig = plot_edge_weight_distribution(edge_weights, name='Jaccard', log=True)
+    fig = plot_edge_weight_distributions(edge_weights, names=['Jaccard'], log=[False, True])
     plt.show()
