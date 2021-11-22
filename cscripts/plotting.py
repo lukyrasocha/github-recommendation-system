@@ -41,7 +41,7 @@ def plot_single_degree_distribution(degrees, name='', ax=None, figsize=(5, 5), s
                     alpha=0.6)
 
     ax.set_title(
-        f"Degree Distribution of {name.title()} ({scale.title()}-Scale)", weight="bold")
+        f"Degree Distribution of\n{name.title()} ({scale.title()}-Scale)", weight="bold")
     ax.set(xlabel='Degrees ($k$)', ylabel='Counts')
 
     if scale == 'log':
@@ -101,8 +101,8 @@ def plot_single_ccdf_degrees(degrees, fit=True, name='', ax=None, figsize=(5, 5)
 
     # computing powerlaw fit
     if fit:
-        results = pl.Fit(data["ccdf"], verbose=False)
-        data["fit"] = results.power_law.Kappa * \
+        results = pl.Fit(data["ccdf"], verbose=False, discrete=True)
+        data["fit"] = (10**results.power_law.Kappa) * \
             (data["k"] ** -results.power_law.alpha)
 
     sns.lineplot(data=data, x='k', y='ccdf', ax=ax)
@@ -110,7 +110,7 @@ def plot_single_ccdf_degrees(degrees, fit=True, name='', ax=None, figsize=(5, 5)
         sns.lineplot(data=data, x='k', y='fit', ax=ax)
 
     ax.set_title(
-        f"CCDF Degree Distribution of {name.title()} ({scale.title()}-Scale)", weight="bold")
+        f"CCDF Degree Distribution of\n{name.title()} ({scale.title()}-Scale)", weight="bold")
     ax.set(xlabel='Degrees ($k$)', ylabel='CCDF (P(X>=k))')
 
     ax.set_xscale('log')
@@ -161,7 +161,7 @@ def plot_single_edge_weight_distribution(edge_weights, name='untitled', ax=None,
     sns.histplot(edge_weights, bins=20, kde=True, log_scale=log, ax=ax)
     ax.set(xlabel='Edge Weights', ylabel='Frequency')
     ax.set(
-        title=f"Edge Weight Distribution of {name.replace('_', ' ').title()}")
+        title=f"Edge Weight Distribution of\n{name.replace('_', ' ').title()}")
 
     return ax
 
