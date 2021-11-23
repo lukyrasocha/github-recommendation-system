@@ -2,12 +2,9 @@
 
 - [x] Add proper requirements.txt file
 
-## Which sections to re-compute
+## Figures
 
-- [ ] Projections
-- [ ] Summary projections
-- [ ] Compute backboning scores
-- [ ] Select threshold, bacbone selected projected network and run summary algorithm
+- [ ] Add better structure (folder and name wise) to the figures folder --> must adjust code in main
 
 ## Questions to ask
 
