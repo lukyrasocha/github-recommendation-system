@@ -3,41 +3,41 @@
 
 Method: Simple Weight
 -------------
-Date: 15/11/21
-Time: 18:10:13
-Load Time: 17.33
-Execution Time: 247.05
+Date: 22/11/21
+Time: 23:13:24
+Load Time: 100.27
+Execution Time: 129.94
 Success: True
 
 Method: Jaccard
 -------
-Date: 15/11/21
-Time: 18:14:37
-Load Time: 16.84
-Execution Time: 245.28
+Date: 22/11/21
+Time: 23:17:14
+Load Time: 103.77
+Execution Time: 142.75
 Success: True
 
 Method: Hyperbolic
 ----------
-Date: 15/11/21
-Time: 18:18:59
-Load Time: 17.24
-Execution Time: 245.22
+Date: 22/11/21
+Time: 23:21:21
+Load Time: 105.65
+Execution Time: 144.27
 Success: True
 
 Method: Probs
 -----
-Date: 15/11/21
-Time: 18:23:22
-Load Time: 39.09
-Execution Time: 249.51
+Date: 22/11/21
+Time: 23:25:30
+Load Time: 107.32
+Execution Time: 144.04
 Success: True
 
 Method: Heats
 -----
-Date: 15/11/21
-Time: 18:28:10
-Load Time: 16.69
-Execution Time: 245.08
+Date: 22/11/21
+Time: 23:29:42
+Load Time: 103.45
+Execution Time: 146.25
 Success: True
 

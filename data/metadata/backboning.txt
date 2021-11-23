@@ -1,0 +1,83 @@
+=== METADATA: Backboning ===
+
+
+Method: Simple Weight Noise Corrected
+-----------------------------
+Date: 23/11/21
+Time: 00:59:52
+Load Time: 14.58
+Execution Time: 71.79
+Success: True
+
+Method: Simple Weight Disparity Filter
+------------------------------
+Date: 23/11/21
+Time: 01:01:04
+Load Time: 14.58
+Execution Time: 25452.23
+Success: True
+
+Method: Jaccard Noise Corrected
+-----------------------
+Date: 23/11/21
+Time: 08:05:36
+Load Time: 19.09
+Execution Time: 90.95
+Success: True
+
+Method: Jaccard Disparity Filter
+------------------------
+Date: 23/11/21
+Time: 08:07:06
+Load Time: 19.09
+Execution Time: 556.07
+Success: True
+
+Method: Hyperbolic Noise Corrected
+--------------------------
+Date: 23/11/21
+Time: 08:16:39
+Load Time: 16.11
+Execution Time: 87.77
+Success: True
+
+Method: Hyperbolic Disparity Filter
+---------------------------
+Date: 23/11/21
+Time: 08:18:06
+Load Time: 16.11
+Execution Time: 564.85
+Success: True
+
+Method: Probs Noise Corrected
+---------------------
+Date: 23/11/21
+Time: 08:27:51
+Load Time: 19.34
+Execution Time: 92.91
+Success: True
+
+Method: Probs Disparity Filter
+----------------------
+Date: 23/11/21
+Time: 08:29:24
+Load Time: 19.34
+Execution Time: 629.14
+Success: True
+
+Method: Heats Noise Corrected
+---------------------
+Date: 23/11/21
+Time: 08:40:12
+Load Time: 19.43
+Execution Time: 98.3
+Success: True
+
+Method: Heats Disparity Filter
+----------------------
+Date: 23/11/21
+Time: 08:41:50
+Load Time: 19.43
+Execution Time: 1981.16
+Success: True
+

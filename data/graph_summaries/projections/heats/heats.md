@@ -1,31 +1,34 @@
 # Generic Summary of Unipartite Graph **Heats**
 ---
-Created: 15/11/21
-Computation Time: 245.08sec
+Created: 22/11/21
+Computation Time: 146.25sec
 
 ## Basic Statistics
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Number of Nodes</td><td>120867</td></tr>
+<tr><td>Number of Nodes</td><td>108748</td></tr>
 <tr><td>Number of Edges</td><td>11058181</td></tr>
-<tr><td>Global Density</td><td>0.0015139160648380996</td></tr>
+<tr><td>Global Density</td><td>0.0018701443365104705</td></tr>
+<tr><td>Global Diameter</td><td>No Global Diameter (Unconnected Graph)</td></tr>
 </table>
 
 ## Degree Statistics
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Average Degree</td><td>182.98097909272175</td></tr>
-<tr><td>Five-Number-Summary Degrees</td><td>[    0.     3.    19.    82. 29649.]</td></tr>
+<tr><td>Average Degree</td><td>203.37258616250415</td></tr>
+<tr><td>Five-Number-Summary Degrees</td><td>[    1.     6.    26.   100. 29649.]</td></tr>
 </table>
 
 ## Edge Weight Statistics
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Average Edge Weight</td><td>None</td></tr>
-<tr><td>Five-Number-Summary Edge Weights</td><td>None</td></tr>
+<tr><td>Average Edge Weight</td><td>0.0023216712275887655</td></tr>
+<tr><td>Five-Number-Summary Edge Weights</td><td>[0.00000031 0.00004409 0.00014842 0.0005787  0.5       ]</td></tr>
+<tr><td>Variance of Edge Weights</td><td>0.0001995303209876125</td></tr>
+<tr><td>Most Frequent Edge Weight</td><td>0.0023148148148148</td></tr>
 </table>
 
 ## Clustering Statistics
@@ -40,11 +43,11 @@ Computation Time: 245.08sec
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Number of CC</td><td>15067</td></tr>
-<tr><td>Average CC Size</td><td>8.021968540519016</td></tr>
-<tr><td>Five-Number-Summary of CC Sizes</td><td>[    1.     1.     1.     1. 99907.]</td></tr>
-<tr><td>Average CC Density</td><td>0.19077740495208304</td></tr>
-<tr><td>Five-Number-Summary of CC Densities</td><td>[0. 0. 0. 0. 1.]</td></tr>
+<tr><td>Number of CC</td><td>2948</td></tr>
+<tr><td>Average CC Size</td><td>36.888738127544094</td></tr>
+<tr><td>Five-Number-Summary of CC Sizes</td><td>[    2.     2.     2.     3. 99907.]</td></tr>
+<tr><td>Average CC Density</td><td>0.9750485618768777</td></tr>
+<tr><td>Five-Number-Summary of CC Densities</td><td>[0.00221309 1.         1.         1.         1.        ]</td></tr>
 </table>
 
 ## Centrality Statistics
