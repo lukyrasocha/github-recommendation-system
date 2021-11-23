@@ -1,10 +1,12 @@
 # summarise.py
-# file that contains code to generate complex summaries including all relevant network 
+# file that contains code to generate complex summaries including all relevant network
 # statistics and visualisation for a generic graph.
 
 # last modified: 15.11.21
 # author: jonas-mika senghaas
 
+from plotting import generate_plots
+from metrics import export_metrics
 import os
 import sys
 from time import time
@@ -16,8 +18,6 @@ if local_path not in sys.path:
     sys.path.append(local_path)
 
 # custom imports
-from metrics import export_metrics
-from plotting import generate_plots
 
 
 def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=True):
@@ -31,7 +31,7 @@ def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=Tru
     s += f"Created: {date.today().strftime('%d/%m/%y')}\n"
 
     start = time()
-    stats = export_metrics(G) 
+    stats = export_metrics(G)
     generate_plots(G, name=name, filepath=f'{savepath}/assets')
     end = time()
     s += f"Computation Time: {round(end - start, 2)}sec\n\n"
@@ -48,11 +48,10 @@ def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=Tru
         for func_name, res in stats[section].items():
             if not plain:
                 s += f"<tr><td>{func_name}</td><td>{res if not None else 'TimeoutException'}</td></tr>\n"
-            else: 
+            else:
                 s += f"| {func_name} | {res if not None else 'timeoutException'} |\n"
         if not plain:
             s += '</table>\n\n'
-
 
     # plots
     for file in os.listdir(f'{savepath}/assets'):
@@ -68,7 +67,8 @@ def generate_markdown(G, filepath='.', name='unnamed', save_name=None, plain=Tru
 def write_metadata(metadata, filepath='.', name='untitled'):
     filepath = f"{filepath}/{name}.txt"
     with open(filepath, 'w') as outfile:
-        outfile.write(f"=== METADATA: {name.replace('_', ' ').title()} ===\n\n\n")
+        outfile.write(
+            f"=== METADATA: {name.replace('_', ' ').title()} ===\n\n\n")
         for method in metadata:
             outfile.write(f"Method: {method.replace('_', ' ').title()}\n")
             outfile.write(f"{'-'*len(method)}\n")
@@ -76,12 +76,8 @@ def write_metadata(metadata, filepath='.', name='untitled'):
                 outfile.write(f"{stat.replace('_', ' ').title()}: {res}\n")
             outfile.write('\n')
 
+
 def generate_summary(G, filepath, name='unnamed'):
-    generate_markdown(G, filepath, name=name, save_name=name+'_plain', plain=True)
+    generate_markdown(G, filepath, name=name,
+                      save_name=name+'_plain', plain=True)
     generate_markdown(G, filepath, name=name, plain=False)
-
-
-if __name__ == '__main__':
-    # test code
-    G = nx.read_gpickle('../data/projections/pickle_format/simple_weight.pickle')
-    generate_markdown(G, filepath='.', name='test', plain=False)
