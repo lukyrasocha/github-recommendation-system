@@ -444,15 +444,20 @@ def betweenness_centrality(G, n):
 def export_metrics(G):
     degrees = get_degrees(G)
     lccs = get_lccs(G)
-    ccs = get_ccs(G)
+    try: 
+        ccs = get_ccs(G)
+    except: 
+        ccs = None
     edge_weights = get_edge_weights(G)
+    try: gd = global_diameter(G)
+    except: gd = None
 
     return {'Basic Statistics': 
                  {
                  'Number of Nodes': number_of_nodes(G), 
                  'Number of Edges': number_of_edges(G), 
                  'Global Density' : global_density(G),
-                 'Global Diameter': global_diameter(G)
+                 'Global Diameter': gd
                     #'Average Diameter': f'{round(average_diameter(G), 2)}', 'Five-Number-Summary Diameter': summarise_diameter(G)}
                  },
             'Degree Statistics': 

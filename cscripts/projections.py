@@ -1,7 +1,7 @@
 # projections.py
 # script holding function to project bipartite network onto one class
 
-# last modified     : 16/11/21
+# last modified     : 22/11/21
 # author            : jonas-mika senghaas, ludek cizinsky
 
 import os
