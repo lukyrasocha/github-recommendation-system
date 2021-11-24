@@ -9,6 +9,9 @@
 ## Questions to ask
 
 - [x] How to deal with too many components in the network? (See slack)
+- [ ] p-value in DF and NC (how does it work, how do we use it, dont we simply 
+      erase edges that are below node's average weight?)
+
 
 ## Network Selection and basic summary
 
@@ -62,9 +65,9 @@
 
 ## Analysis of Metrics and Visualising Unipartite Networks (Projection/ Backboned Networks)
 
-- [ ] Add further plots to generated markdown (ccdf of dd, power law fit, distribution
+- [x] Add further plots to generated markdown (ccdf of dd, power law fit, distribution
       of edge weights, distribution of cc sizes, ...)
-- [ ] Find way to automatically convert MD into well-formatted PNG, PDF (to load
+- [x] Find way to automatically convert MD into well-formatted PNG, PDF (to load
       file into Jupyter while displaying plots) / alternatively: find out why iPython's
       display(Markdown) does not show the produced local plots
 
@@ -111,12 +114,67 @@ _(Note that there might be additional sections added to here)_
   - [x] projections
   - [ ] summary of projections (fix some bugs, see below)
         -> Fix plotting of edge weight distribution (sort by value in counter dict)
-  - [ ] backboned graphs
-  - [ ] summary of backboned graphs
+  - [x] backboned graphs
+  - [x] summary of backboned graphs
+  - [ ] run backboning again for props and heats (now directed graphs)
+  - [ ] look into implementation from michele for backboning
 
-- [ ] move projection methods into csripts (?)
+- [x] move projection methods into csripts (?)
 
 ## Visualisation
 
-- [ ] Basic Visualisation of structure of Graph -> very small subgraph -> library that is able to plot bipartite structure
-- [ ] Interactive Network Visualisation -> pyvis.Network
+- [x] Network Visualisation -> pyvis.Network
+
+
+## Recommendation Algorithm
+
+### Algorithm 1: Naive Neighborhood Approach
+--- 
+The final recommendation for a single repository is the k neighbors connected to 
+the queried repository with highest edge weight (descending order). 
+
+Runtime: O(log(k)\*k for k being degree of node n for all n in N)
+
+- [x] done
+
+### Algorithm 2: Search Depth Approach
+---
+The final recommendation for a single repository is considering not only the k
+neighbors, but also each of the k neighbors neighbors. We consider up to p levels 
+of search depth, where one level corresponds to finding neighbors of all neighbors from
+the previous level. 
+If p = 1, then search depth is equivalent to the naive neighborhood approach.
+
+TODO: How do we find the edge weight between the source node and nodes at search depth > 1
+
+- making edge weight disproportionally to search depth smaller (how do we take previous 
+edge weights into consideration)
+
+- [ ] done
+
+### Algorithm 3: LCC
+--- 
+Similar to search depth with p=2 algorithm, but only takes those neighbor neighbors 
+into consideration that are within the intersection of at least two neighbors of the source node.
+The edge weight of such LCC (closing triangle) nodes might be computed as a projection 
+from the source node to the LCC node. 
+
+- [ ] done
+
+## Evaluation of Recommendation System
+---
+- [ ] 
+
+ 
+## Cool Ideas 
+---
+- [ ] Link prediction if we can predict less than required n repositories 
+      (for around 10% of our nodes)
+
+
+## Webapp
+---
+- [ ] Random Search Button
+
+
+
