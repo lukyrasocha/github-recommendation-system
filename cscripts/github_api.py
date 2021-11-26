@@ -49,7 +49,7 @@ class Repo:
             self.open_issues_count = data.get("open_issues_count")
             self.topics = data.get("topics")
             self.has_wiki = data.get("has_wiki")
-            self.language = data.get("languages")
+            self.language = {x[0] for x in data.get("languages")}
             self.homepage = data.get("homepage")
 
 
