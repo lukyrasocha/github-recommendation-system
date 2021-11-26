@@ -49,7 +49,7 @@
   - Heats
   - Hyperbolic
   - Vectorised projections (e.g. Cosine) - Implemented but due to performance reasons excluded it
-- [ ] Add description/comment to the above defined methods
+- [x] Add description/comment to the above defined methods
 
 ## Network backboning
 
@@ -163,7 +163,10 @@ from the source node to the LCC node.
 
 ## Evaluation of Recommendation System
 ---
-- [ ] 
+- [ ] map metadata from github api to the final recommendation system (
+- [ ]
+
+- [ ] think about using link prediction 
 
  
 ## Cool Ideas 
@@ -175,6 +178,3 @@ from the source node to the LCC node.
 ## Webapp
 ---
 - [ ] Random Search Button
-
-
-
