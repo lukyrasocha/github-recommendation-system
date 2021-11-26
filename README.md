@@ -26,7 +26,7 @@
 
 ## Folder structure
 Last Checked: 16. November 11:00
-`
+```
 ├───cscripts
 ├───data
 │   ├───figures
@@ -56,4 +56,4 @@ Last Checked: 16. November 11:00
 ├───recommendations
 │   └───simple_weight
 └───scripts
-`
+```
