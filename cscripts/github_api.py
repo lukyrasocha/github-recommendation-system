@@ -4,6 +4,7 @@ from datetime import date
 from time import time
 import os
 import sys
+import json
 
 local_path = os.path.dirname(os.path.realpath(__file__))
 if local_path not in sys.path:
@@ -32,16 +33,24 @@ class Markdown:
 class Repo:
 
     def __init__(self, data) -> None:
-        self.name = data.get("name")
-        self.description = data.get("description")
-        self.forks_count = data.get("forks_count")
-        self.stargazers_count = data.get("stargazers_count")
-        self.watchers_count = data.get("watchers_count")
-        self.open_issues_count = data.get("open_issues_count")
-        self.topics = data.get("topics")
-        self.has_wiki = data.get("has_wiki")
-        self.language = data.get("language")
-        self.homepage = data.get("homepage")
+
+        # No meta?
+        self.has_meta = len(data) > 0
+
+        # If meta, parse relevant
+        if self.has_meta:
+
+            # * Relevant attributes
+            self.name = data.get("name")
+            self.description = data.get("description")
+            self.forks_count = data.get("forks_count")
+            self.stargazers_count = data.get("stargazers_count")
+            self.watchers_count = data.get("watchers_count")
+            self.open_issues_count = data.get("open_issues_count")
+            self.topics = data.get("topics")
+            self.has_wiki = data.get("has_wiki")
+            self.language = data.get("languages")
+            self.homepage = data.get("homepage")
 
 
 class GithubApi:
@@ -53,7 +62,7 @@ class GithubApi:
         """
         Returns raw repo metda data.
         :repo_name: [owner_name]/[actual_repo_name], str
-        :return: dict or None (in vase of a problem)
+        :return: status_code, dict
         """
         print("="*10)
         print(f"Fetching data from Github API for: {repo_name}\n")
@@ -73,12 +82,12 @@ class GithubApi:
         if r.status_code == 200:
             print(self.get_error_response(r.status_code))
             print("="*10)
-            return r.json()
+            return r.status_code, r.json()
 
         else:
             print(self.get_error_response(r.status_code))
             print("="*10)
-            return None
+            return r.status_code, dict()
 
     def get_error_response(self, status_code):
         """
@@ -97,7 +106,7 @@ class GithubApi:
 
 class ReposSummary(GithubApi):
 
-    def __init__(self, repositories, name, path, token=GITHUB_TOKEN) -> None:
+    def __init__(self, token=GITHUB_TOKEN, repositories=[], name='unknown', path='.') -> None:
 
         # Inherit from the parent class
         super().__init__(token)
@@ -106,6 +115,28 @@ class ReposSummary(GithubApi):
         self.repositories = repositories
         self.path = path  # where to save the summary
         self.name = name
+        self.given_meta = None
+
+        # Run the neccesary functions
+        self.load_given_metadata()
+
+    def load_given_metadata(self):
+        """
+        Loads and saves as attribute given metadata.
+        """
+
+        # Load metadata which we have from the dataset
+        with open("../data/transformed/metadata.json", "r") as f:
+
+            # Load it
+            metadata = json.load(f)
+
+            # Adjust it so you have repo name as a key
+            metadata = {values["repo_name"]
+                : values for values in metadata.values()}
+
+        # Save it
+        self.given_meta = metadata
 
     def generate_summary(self):
 
@@ -144,12 +175,18 @@ class ReposSummary(GithubApi):
         :return: None or Repo object
         """
 
-        # Get raw data
-        raw_data = self.get_repo_data(repo_name)
-        if not raw_data:
-            return None
+        # API metadata
+        status, info = self.get_repo_data(repo_name)
+
+        # Combine the results into a dictionary
+        # If there is no metadata at all, it will yield empty dict
+        if status == 200:
+            combined = info  # to unite the terminology for next ops
+            combined.update(self.given_meta.get(repo_name, dict()))
+        else:
+            combined = self.given_meta.get(repo_name, dict())
 
         # Select relevant data
-        r = Repo(raw_data)
+        r = Repo(combined)
 
         return r
