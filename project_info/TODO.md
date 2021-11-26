@@ -49,7 +49,7 @@
   - Heats
   - Hyperbolic
   - Vectorised projections (e.g. Cosine) - Implemented but due to performance reasons excluded it
-- [ ] Add description/comment to the above defined methods
+- [x] Add description/comment to the above defined methods
 
 ## Network backboning
 
