@@ -34,8 +34,6 @@ def generate_metadata(repos, filepath='.', name='untitled'):
     with open('../data/tranformed/github_metadata.json', 'r') as infile:
         data = json.load(infile)
 
-        for 
-
 
     # write to json file
     with open(f'{filepath}/{name}.json', 'w') as outfile:
