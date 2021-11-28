@@ -1,7 +1,7 @@
 # Generic Summary of Unipartite Graph **Heats/Noise_Corrected**
 ---
-Created: 23/11/21
-Computation Time: 55.65sec
+Created: 27/11/21
+Computation Time: 37.67sec
 
 ## Basic Statistics
 ---
@@ -9,8 +9,8 @@ Computation Time: 55.65sec
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
 <tr><td>Number of Nodes</td><td>108748</td></tr>
 <tr><td>Number of Edges</td><td>3494874</td></tr>
-<tr><td>Global Density</td><td>0.000591048276196392</td></tr>
-<tr><td>Global Diameter</td><td>No Global Diameter (Unconnected Graph)</td></tr>
+<tr><td>Global Density</td><td>0.000295524138098196</td></tr>
+<tr><td>Global Diameter</td><td>None</td></tr>
 </table>
 
 ## Degree Statistics
@@ -27,7 +27,7 @@ Computation Time: 55.65sec
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
 <tr><td>Average Edge Weight</td><td>0.012797977023178298</td></tr>
 <tr><td>Five-Number-Summary Edge Weights</td><td>[0.00001814 0.00138313 0.00389105 0.01162791 0.5       ]</td></tr>
-<tr><td>Variance of Edge Weights</td><td>0.001018044913396647</td></tr>
+<tr><td>Variance of Edge Weights</td><td>0.0010180449133966468</td></tr>
 <tr><td>Most Frequent Edge Weight</td><td>0.0023148148148148</td></tr>
 </table>
 
@@ -43,11 +43,11 @@ Computation Time: 55.65sec
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Number of CC</td><td>2961</td></tr>
-<tr><td>Average CC Size</td><td>36.72678149273894</td></tr>
-<tr><td>Five-Number-Summary of CC Sizes</td><td>[    2.     2.     2.     3. 99873.]</td></tr>
-<tr><td>Average CC Density</td><td>0.9750675375618211</td></tr>
-<tr><td>Five-Number-Summary of CC Densities</td><td>[0.00069806 1.         1.         1.         1.        ]</td></tr>
+<tr><td>Number of CC</td><td>None</td></tr>
+<tr><td>Average CC Size</td><td>None</td></tr>
+<tr><td>Five-Number-Summary of CC Sizes</td><td>None</td></tr>
+<tr><td>Average CC Density</td><td>None</td></tr>
+<tr><td>Five-Number-Summary of CC Densities</td><td>None</td></tr>
 </table>
 
 ## Centrality Statistics

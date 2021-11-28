@@ -1,7 +1,7 @@
 # Generic Summary of Unipartite Graph **Heats**
 ---
-Created: 23/11/21
-Computation Time: 182.29sec
+Created: 27/11/21
+Computation Time: 98.85sec
 
 ## Basic Statistics
 ---
@@ -25,10 +25,10 @@ Computation Time: 182.29sec
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Average Edge Weight</td><td>None</td></tr>
-<tr><td>Five-Number-Summary Edge Weights</td><td>None</td></tr>
-<tr><td>Variance of Edge Weights</td><td>None</td></tr>
-<tr><td>Most Frequent Edge Weight</td><td>None</td></tr>
+<tr><td>Average Edge Weight</td><td>0.0042253338088705</td></tr>
+<tr><td>Five-Number-Summary Edge Weights</td><td>[0.00000031 0.00010369 0.00041152 0.0018018  0.5       ]</td></tr>
+<tr><td>Variance of Edge Weights</td><td>0.00034492213293132177</td></tr>
+<tr><td>Most Frequent Edge Weight</td><td>0.0006925207756232</td></tr>
 </table>
 
 ## Clustering Statistics

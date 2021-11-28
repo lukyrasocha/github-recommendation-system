@@ -1,7 +1,7 @@
 # Generic Summary of Unipartite Graph **Heats/Disparity_Filter**
 ---
-Created: 23/11/21
-Computation Time: 37.43sec
+Created: 27/11/21
+Computation Time: 28.01sec
 
 ## Basic Statistics
 ---
@@ -9,8 +9,8 @@ Computation Time: 37.43sec
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
 <tr><td>Number of Nodes</td><td>96757</td></tr>
 <tr><td>Number of Edges</td><td>1395714</td></tr>
-<tr><td>Global Density</td><td>0.0002981715000858724</td></tr>
-<tr><td>Global Diameter</td><td>No Global Diameter (Unconnected Graph)</td></tr>
+<tr><td>Global Density</td><td>0.0001490857500429362</td></tr>
+<tr><td>Global Diameter</td><td>None</td></tr>
 </table>
 
 ## Degree Statistics
@@ -25,9 +25,9 @@ Computation Time: 37.43sec
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Average Edge Weight</td><td>0.026495649423837895</td></tr>
+<tr><td>Average Edge Weight</td><td>0.026495649423837905</td></tr>
 <tr><td>Five-Number-Summary Edge Weights</td><td>[0.00002299 0.0070922  0.01470588 0.02777778 0.5       ]</td></tr>
-<tr><td>Variance of Edge Weights</td><td>0.001998112131080485</td></tr>
+<tr><td>Variance of Edge Weights</td><td>0.0019981121310804852</td></tr>
 <tr><td>Most Frequent Edge Weight</td><td>0.0357142857142857</td></tr>
 </table>
 
@@ -43,11 +43,11 @@ Computation Time: 37.43sec
 ---
 <table>
 <tr><th align="center"><img width="441" height="1"><p><small>Network Statistic</small></p></th><th align="center"><img width="441" height="1"><p><small>Result</small></p></th></tr>
-<tr><td>Number of CC</td><td>196</td></tr>
-<tr><td>Average CC Size</td><td>493.65816326530614</td></tr>
-<tr><td>Five-Number-Summary of CC Sizes</td><td>[    2.     2.     2.     3. 95992.]</td></tr>
-<tr><td>Average CC Density</td><td>0.8348683931424699</td></tr>
-<tr><td>Five-Number-Summary of CC Densities</td><td>[0.00030281 0.66666667 1.         1.         1.        ]</td></tr>
+<tr><td>Number of CC</td><td>None</td></tr>
+<tr><td>Average CC Size</td><td>None</td></tr>
+<tr><td>Five-Number-Summary of CC Sizes</td><td>None</td></tr>
+<tr><td>Average CC Density</td><td>None</td></tr>
+<tr><td>Five-Number-Summary of CC Densities</td><td>None</td></tr>
 </table>
 
 ## Centrality Statistics

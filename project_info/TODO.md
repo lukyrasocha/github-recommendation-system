@@ -5,7 +5,11 @@
 - [x] Add proper requirements.txt file
 - [x] make helperfunction to produce metadata about computationally heavy runs
 - [x] move projection methods into csripts
-- [ ] Run backboning and summary again for props and heats (now directed graphs)
+
+## Bug fixes
+
+- [x] Run backboning and summary again for props and heats (now directed graphs)
+- [ ] When running summaries, cancel showing generated graphs
 
 ## Figures
 
@@ -16,6 +20,7 @@
 - [x] How to deal with too many components in the network? (See slack)
 - [ ] p-value in DF and NC (how does it work, how do we use it, dont we simply
       erase edges that are below node's average weight?)
+- [ ] Why do we get max for heats and probs 0.5 in terms of weight?
 
 # Data preprocessing and EDA
 
