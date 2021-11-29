@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import Search from './components/Search';
 
 const App = () => {
-    const [recommend, setRecommend] = useState();
+    const [data, setData] = useState();
 
     const getData = async () => {
-        const res = await fetch('/data/test.json');
-        const data = await res.json();
-        setRecommend(data);
+        const res = await fetch('/data/naive_recommend.json');
+        const res_json = await res.json();
+        setData(res_json);
     };
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const App = () => {
                 <img src="/github-icon.png" alt="github-icon" />
                 <h1>REPOmmend</h1>
             </div>
-            <Search recommend={recommend} />
+            <Search data={data} />
             <p className="copyright">&copy; No Rights Reserved.</p>
         </div>
     );

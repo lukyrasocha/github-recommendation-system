@@ -1,23 +1,36 @@
 import React, { useState } from 'react';
 import Repo from './Repo';
 
-const Search = ({ recommend }) => {
+const Search = ({ data }) => {
     const [search, setSearch] = useState('');
     const [res, setRes] = useState(null);
     const [hasRes, setHasRes] = useState(false);
 
+    const randomRepo = (e) => {
+        e.preventDefault();
+
+        var keys = Object.keys(data);
+        const random_repo = keys[(keys.length * Math.random()) << 0];
+
+        setSearch(random_repo);
+    };
+
     const handleSearch = (e) => {
         e.preventDefault();
 
-        if (search in recommend) {
-            // search key exist in our recommend map
-            setRes(recommend[search]);
+        if (search in data) {
+            setRes(data[search]);
             setHasRes(true);
-            // assign response; array of recommend objects (with metadata)
         } else {
             setRes(null);
             setHasRes(true);
         }
+        setSearch('');
+    };
+
+    const clearAll = () => {
+        setHasRes(false);
+        setRes(null);
         setSearch('');
     };
 
@@ -26,15 +39,8 @@ const Search = ({ recommend }) => {
             if (res !== null) {
                 return (
                     <div className="results">
-                        {res.map((el, index) => {
-                            return (
-                                <Repo
-                                    key={index}
-                                    name={el.repo_name}
-                                    created={el.creation_date}
-                                    found={true}
-                                />
-                            );
+                        {res.map((name, index) => {
+                            return <Repo key={name} name={name} found={true} />;
                         })}
                     </div>
                 );
@@ -60,22 +66,24 @@ const Search = ({ recommend }) => {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                <div className="bouttons">
+                <div className="buttons">
                     <button type="submit" onClick={(e) => handleSearch(e)}>
                         Search
                     </button>
                     <button
                         onClick={(e) => {
                             e.preventDefault();
-                            setHasRes(false);
-                            setRes([]);
+                            clearAll();
                         }}
                     >
                         Clear
                     </button>
+                    <button onClick={(e) => randomRepo(e)}>Random Repo</button>
                 </div>
             </form>
-            {displayResults(hasRes, res)}
+            <div className="search-container">
+                {displayResults(hasRes, res)}
+            </div>
         </div>
     );
 };
