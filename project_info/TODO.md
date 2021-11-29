@@ -2,9 +2,8 @@
 
 ## Other
 
-- [x] Add proper requirements.txt file
-- [x] make helperfunction to produce metadata about computationally heavy runs
-- [x] move projection methods into csripts
+- [ ] adjust folder structure (ie. no need for subfolder `edge_list_format` in `projections`), also in notebook
+- [ ] cleanup `main.ipynb` and add descriptions wherever necessary. all results/ plots/ graphs should be produced from main (and only 		use helperfunctions from `cscripts`)
 
 ## Bug fixes
 
@@ -22,8 +21,7 @@
       erase edges that are below node's average weight?)
 - [ ] Why do we get max for heats and probs 0.5 in terms of weight?
 
-# Data preprocessing and EDA
-
+# Building Recommendation Graph 
 ## Network Selection and basic summary
 
 - [x] Choose a proper network to work on
@@ -91,7 +89,8 @@ Runtime: O(log(k)\*k for k being degree of node n for all n in N)
 
 ## Algorithm 2: Search Depth Approach
 
-- [ ] Implement the method
+- [x] Implement the method (VERY NAIVELY SO FAR)
+- [ ] improve method (low priority)
 
 ## Algorithm 3: LCC
 
@@ -99,16 +98,16 @@ Similar to search depth with p=2 algorithm, but only takes those neighbor neighb
 into consideration that are within the intersection of at least two neighbors of the source node. The edge weight of such LCC (closing triangle) nodes might be computed as a projection
 from the source node to the LCC node.
 
-- [ ] Implement the method
+- [ ] Implement the method (low priority)
 
 # Evaluation of Recommendation System
 
-- [ ] map metadata from github api to the final recommendation system
+- [x] map metadata from github api to the final recommendation system
+	  -> failed on tags because of lack of tags (infeasible to compute)
+- [x] ran evaluation on different final recommendation graph and both recommendation algorithms
+- [ ] run evluation on all possible recommendation graphs 
+- [ ] interpret results (NOTE: no ground truth, higher score not necessarily better recommendation, just higher language similarity)
 
-# Additional ideas
-
-- [ ] Link prediction if we can predict less than required n repositories
-      (for around 10% of our nodes)
 
 # Visualisation
 
@@ -116,5 +115,24 @@ from the source node to the LCC node.
 
 # Webapp
 
-- [ ] Random Search Button
-- [ ] Add relevant metadata using GithubApi for recommended repos
+- [x] Random Search Button
+- [x] Add relevant metadata using GithubApi for recommended repos
+- [ ] Fix weird wrapping of long titles
+- [ ] find more relevant metadata
+- [ ] maybe also display metadata of repo that was queried
+- [ ] render a loading symbol while metadata is fetching
+- [ ] hide github api token
+
+# Presentation
+
+- [ ] slides about projections methods (and how we arrive at the conclusion to use `HeatS`) 
+- [ ] slides about backboning methods (and how we arrive at the conclusion to use `noise_corrected`)
+- [ ] slides about recommendation algorithms ()
+- [ ] slides about evaluation system and their interpretation ()
+
+*Note: Show all these steps on small test graphs that represent our data*
+
+# Future Ideas 
+
+- [ ] Link prediction if we can predict less than required n repositories
+      (for around 10% of our nodes)
