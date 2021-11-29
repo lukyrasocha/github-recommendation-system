@@ -1,3 +1,4 @@
+import numpy as np
 import requests
 from envvars import GITHUB_TOKEN
 from datetime import date
@@ -5,6 +6,8 @@ from time import time
 import os
 import sys
 import json
+from tqdm import tqdm
+from pprint import pprint
 
 local_path = os.path.dirname(os.path.realpath(__file__))
 if local_path not in sys.path:
@@ -39,18 +42,17 @@ class Repo:
 
         # If meta, parse relevant
         if self.has_meta:
-
             # * Relevant attributes
-            self.name = data.get("name")
-            self.description = data.get("description")
-            self.forks_count = data.get("forks_count")
-            self.stargazers_count = data.get("stargazers_count")
-            self.watchers_count = data.get("watchers_count")
-            self.open_issues_count = data.get("open_issues_count")
-            self.topics = data.get("topics")
-            self.has_wiki = data.get("has_wiki")
-            self.language = {x[0] for x in data.get("languages")}
-            self.homepage = data.get("homepage")
+            self.name = data.get("name") if data.get('name') else None
+            self.description = data.get("description") if data.get('description') else None
+            self.forks_count = data.get("forks_count") if data.get('forks_count') else None
+            self.stargazers_count = data.get("stargazers_count") if data.get('stargazers_count') else None
+            self.watchers_count = data.get("watchers_count") if data.get('watchers_count') else None
+            self.open_issues_count = data.get("open_issues_count") if data.get('open_issues_count') else None
+            self.topics = set(data.get("topics")) if data.get('topics') else None
+            self.has_wiki = data.get("has_wiki") if data.get('has_wiki') else None
+            self.languages = {x[0] for x in data.get("languages")} if data.get('languages') else None
+            self.homepage = data.get("homepage") if data.get('homepage') else None
 
 
 class GithubApi:
@@ -64,8 +66,8 @@ class GithubApi:
         :repo_name: [owner_name]/[actual_repo_name], str
         :return: status_code, dict
         """
-        print("="*10)
-        print(f"Fetching data from Github API for: {repo_name}\n")
+        #print("="*10)
+        #print(f"Fetching data from Github API for: {repo_name}\n")
         # Define parameters
         owner, repo = repo_name.split("/")
 
@@ -80,13 +82,13 @@ class GithubApi:
 
         # Return proper response
         if r.status_code == 200:
-            print(self.get_error_response(r.status_code))
-            print("="*10)
+            #print(self.get_error_response(r.status_code))
+            #print("="*10)
             return r.status_code, r.json()
 
         else:
-            print(self.get_error_response(r.status_code))
-            print("="*10)
+            #print(self.get_error_response(r.status_code))
+            #print("="*10)
             return r.status_code, dict()
 
     def get_error_response(self, status_code):
@@ -190,3 +192,49 @@ class ReposSummary(GithubApi):
         r = Repo(combined)
 
         return r
+
+
+"""
+def get_all_metadata(repos, filepath='.', name='api_metadata.json'):
+    api = GithubApi(GITHUB_TOKEN)
+
+    # random_sample = np.random.choice(list(recommendations.keys()), size=int(len(recommendations)*test_size)) 
+
+    attributes = ['topics']
+    with open('../data/transformed/
+
+    data = {} 
+    for repo in repos:
+        res = api.get_repo_data(repo)[1]
+        key = res.get('full_name')
+        val = {attribute: res.get(attribute) for attribute in attributes}
+        val.update
+
+        data[key] = val
+        print(data)
+        break
+
+
+"""
+if __name__ == '__main__':
+    with open('./untitled.json', 'r') as infile:
+        data = json.load(infile)
+    repos = data.keys()
+
+    api = GithubApi(GITHUB_TOKEN)
+
+    c = 0
+    for repo in tqdm(repos):
+        status_code, res = api.get_repo_data(repo)
+
+        if res.get('topics'):
+            print(res.get('topics'))
+            c+=1
+            if c==100:
+                break
+
+
+    
+
+
+
