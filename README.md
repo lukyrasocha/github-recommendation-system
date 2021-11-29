@@ -11,10 +11,10 @@ While the focus of this project was on understanding, applying and argue in favo
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/LudekCizinsky"><img src="https://github.com/LudekCizinsky.png?size=50" width="100px;" alt=""/><br /><sub><b>Ludek Cizinsky</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/jonas-mika"><img src="https://github.com/jonas-mika.png?size=50" width="100px;" alt=""/><br /><sub><b>Jonas-Mika Senghaas</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/lukyrasocha"><img src="https://github.com/lukyrasocha.png?size=50" width="100px;" alt=""/><br /><sub><b>Lukas Rasocha</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/louisbrandt"><img src="https://github.com/louisbrandt.png?size=50" width="100px;" alt=""/><br /><sub><b>Louis Brandt</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/LudekCizinsky"><img src="https://github.com/LudekCizinsky.png?size=100" width="100px;" alt=""/><br /><sub><b>Ludek Cizinsky</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/jonas-mika"><img src="https://github.com/jonas-mika.png?size=100" width="100px;" alt=""/><br /><sub><b>Jonas-Mika Senghaas</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/lukyrasocha"><img src="https://github.com/lukyrasocha.png?size=100" width="100px;" alt=""/><br /><sub><b>Lukas Rasocha</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/louisbrandt"><img src="https://github.com/louisbrandt.png?size=100" width="100px;" alt=""/><br /><sub><b>Louis Brandt</b></sub></a><br /></td>
   </tr>
 </table>
 
