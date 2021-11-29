@@ -6,11 +6,16 @@ import github_api
 import pandas as pd
 import networkx as nx
 import json
+import os
+import math
 from pathlib import Path
 from datetime import date
 
+# Progress bar
+from tqdm import tqdm
 
-class Similarity:
+
+class Recommend:
 
     def __init__(self, path, thrs, meta_path) -> None:
         self.path = path
@@ -47,39 +52,52 @@ class Similarity:
 
         return [key for key, info in dict(self.G.nodes).items() if "metadata" in info and info["metadata"]["repo_name"] == node_name][0]
 
-    def naive_approach(self, how_many, repo_name):
-        """
+    def naive_recommend(self, n, R):
 
+        """
         Algorithm
         ---
-        Find N most similar repositories based on the weight of the connections. The higher the better.
+        Find N most relevant repositories based on the edge weight of the neighboring connections to the given repository R.
+        The higher the weight of the connecting edge, the better.
 
         Attributes
         ---
-        :how_many: int (> 0), how many repos do you want to return
-        :repo_name: str, for which repository do you want to find most similar repositories ([user_name/repo_name])
-        :return: None
+        :n: int (> 0), how many repos do you want to return
+        :R: str, name of a repository for which you want to find most similar repositories
+        :return: list, recommended repository names
         """
 
         # Get top neighbors using a naive approach
-        top_edges = sorted([edge for edge in self.G.edges(self.get_node_id(repo_name), data=True)],
+        top_edges = sorted([edge for edge in self.G.edges(self.get_node_id(R), data=True)],
                            reverse=True,
-                           key=lambda edge: edge[-1]["nij"])[:how_many]
+                           key=lambda edge: edge[-1]["weight"])[:n]
 
         # Get the top repo names
         top_repo_names = [self.G.nodes[edge[1]]["metadata"]
                           ["repo_name"] for edge in top_edges]
+        
+        return top_repo_names
+    
+    def search_depth_recommend(self, n, R, search_depth='max'):
+    
+        """
+        Algorithm
+        ---
+        Let the repository for which we want to return relevant recommendations be denoted as R.
+        The search_depth_recommend improves the naive_recommend by also considering repositories whose
+        path length to the R is > 1. (non-neighboring repositories)
 
-        # Define where to save the summary
-        filename = date.today().strftime("summmary_%d_%m_%y-%H:%M:%S")
-        folder_path = '../data/recommend_summary/naive/'
+        Therefore, we assume that in certain cases a non-neighboring repository might be more relevant
+        as a recommendation than a neighboring repository. More specifically, we introduce new variable W.
+        W represents a weight of a theoretical edge between R and M where M is a repository whose path length
+        to R is > 1. (theoretical because the edge does not indeed exist)
 
-        # Check if path exists, if not, create the missing repos
-        path = Path(f"{folder_path}{filename}")
-        path.parent.mkdir(parents=True, exist_ok=True)
-
-        # Create a md summary
-        github_api.ReposSummary(top_repo_names, filename, folder_path)
+        Attributes
+        ---
+        
+        """
+        if search_depth == 'max':
+            search_depth = math.inf
 
 
 if __name__ == "__main__":

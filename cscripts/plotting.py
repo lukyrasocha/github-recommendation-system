@@ -24,8 +24,8 @@ if local_path not in sys.path:
 
 
 # global settings
-sns.set_style("darkgrid")
-sns.set(rc={"xtick.bottom": True, "ytick.left": True})
+sns.set_style("darkgrid");
+sns.set(rc={"xtick.bottom": True, "ytick.left": True});
 
 
 def plot_single_degree_distribution(degrees, name='', ax=None, figsize=(5, 5), scale='linear'):
@@ -38,7 +38,7 @@ def plot_single_degree_distribution(degrees, name='', ax=None, figsize=(5, 5), s
 
     sns.scatterplot(data=data, x='k', y='count',
                     ax=ax,
-                    alpha=0.6)
+                    alpha=0.6);
 
     ax.set_title(
         f"Degree Distribution of\n{name.title()} ({scale.title()}-Scale)", weight="bold")
@@ -105,9 +105,9 @@ def plot_single_ccdf_degrees(degrees, fit=True, name='', ax=None, figsize=(5, 5)
         data["fit"] = (10**results.power_law.Kappa) * \
             (data["k"] ** -results.power_law.alpha)
 
-    sns.lineplot(data=data, x='k', y='ccdf', ax=ax)
+    sns.lineplot(data=data, x='k', y='ccdf', ax=ax);
     if fit:
-        sns.lineplot(data=data, x='k', y='fit', ax=ax)
+        sns.lineplot(data=data, x='k', y='fit', ax=ax);
 
     ax.set_title(
         f"CCDF Degree Distribution of\n{name.title()} ({scale.title()}-Scale)", weight="bold")
@@ -156,9 +156,9 @@ def plot_ccdfs_degrees(*degrees, names=None, fit=True, figsize=(5, 5)):
 def plot_single_edge_weight_distribution(edge_weights, name='untitled', ax=None, log=True, figsize=(5, 5)):
     if ax == None:
         fig, ax = plt.subplots(figsize=figsize)
-    sns.set_context(rc={'patch.linewidth': 0.0})
+    sns.set_context(rc={'patch.linewidth': 0.0});
 
-    sns.histplot(edge_weights, bins=20, kde=True, log_scale=log, ax=ax)
+    sns.histplot(edge_weights, bins=20, kde=True, log_scale=log, ax=ax);
     ax.set(xlabel='Edge Weights', ylabel='Frequency')
     ax.set(
         title=f"Edge Weight Distribution of\n{name.replace('_', ' ').title()}")

@@ -1,93 +1,39 @@
 === METADATA: Projections Backboning Summaries ===
 
 
-Method: Simple Weight Noise Corrected
------------------------------
-Date: 23/11/21
-Time: 09:38:59
-Backboning Time: 8.19
-Load Time: 48.79
-Execution Time: 99.07
-Success: True
-
-Method: Simple Weight Disparity Filter
-------------------------------
-Date: 23/11/21
-Time: 09:41:35
-Backboning Time: 6.68
-Load Time: 1.17
-Execution Time: 27.25
-Success: True
-
-Method: Jaccard Noise Corrected
------------------------
-Date: 23/11/21
-Time: 09:42:10
-Backboning Time: 7.04
-Load Time: 25.22
-Execution Time: 78.08
-Success: True
-
-Method: Jaccard Disparity Filter
-------------------------
-Date: 23/11/21
-Time: 09:44:00
-Backboning Time: 7.52
-Load Time: 5.54
-Execution Time: 28.87
-Success: True
-
-Method: Hyperbolic Noise Corrected
---------------------------
-Date: 23/11/21
-Time: 09:44:42
-Backboning Time: 6.85
-Load Time: 18.73
-Execution Time: 60.42
-Success: True
-
-Method: Hyperbolic Disparity Filter
----------------------------
-Date: 23/11/21
-Time: 09:46:08
-Backboning Time: 6.79
-Load Time: 5.42
-Execution Time: 33.49
-Success: True
-
 Method: Probs Noise Corrected
 ---------------------
-Date: 23/11/21
-Time: 09:46:54
-Backboning Time: 6.77
-Load Time: 14.26
-Execution Time: 52.36
+Date: 27/11/21
+Time: 20:57:50
+Backboning Time: 9.65
+Load Time: 38.83
+Execution Time: 35.52
 Success: True
 
 Method: Probs Disparity Filter
 ----------------------
-Date: 23/11/21
-Time: 09:48:07
-Backboning Time: 7.99
-Load Time: 4.9
-Execution Time: 35.45
+Date: 27/11/21
+Time: 20:59:14
+Backboning Time: 7.25
+Load Time: 5.7
+Execution Time: 28.2
 Success: True
 
 Method: Heats Noise Corrected
 ---------------------
-Date: 23/11/21
-Time: 09:48:56
-Backboning Time: 7.16
-Load Time: 12.34
-Execution Time: 55.66
+Date: 27/11/21
+Time: 20:59:55
+Backboning Time: 7.26
+Load Time: 15.29
+Execution Time: 37.67
 Success: True
 
 Method: Heats Disparity Filter
 ----------------------
-Date: 23/11/21
-Time: 09:50:11
-Backboning Time: 8.05
-Load Time: 6.41
-Execution Time: 37.43
+Date: 27/11/21
+Time: 21:00:55
+Backboning Time: 7.63
+Load Time: 8.44
+Execution Time: 28.01
 Success: True
 
