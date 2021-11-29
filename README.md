@@ -9,24 +9,14 @@ While the focus of this project was on understanding, applying and argue in favo
 
 # Contributers
 
-<div style="display: flex; flex-direction: staart;">
-<a href="https://github.com/LudekCizinsky" style="display: flex; flex-direction: column; align-items:center; justify-content:center; padding: 20px">
-  <img src="https://github.com/LudekCizinsky.png?size=100"style='border-radius:50px; margin-bottom: 10px'>
-  <p style="color: black; width:100">Ludek Cizinsky</p>
-</a>
-<a href="https://github.com/jonas-mika" style="display: flex; flex-direction: column; align-items:center; justify-content:center; padding: 20px">
-  <img src="https://github.com/jonas-mika.png?size=100" style='border-radius:50px; margin-bottom: 10px'>
-  <p style="color: black; width:100">Jonas-Mika Senghaas</p>
-</a>
-<a href="https://github.com/lukyrasocha" style="display: flex; flex-direction: column; align-items:center; justify-content:center; padding: 20px">
-  <img src="https://github.com/lukyrasocha.png?size=100"style='border-radius:50px; margin-bottom: 10px'>
-  <p style="color: black; width:100">Lukas Rasocha</p>
-</a>
-<a href="https://github.com/louisbrandt" style="display: flex; flex-direction: column; align-items:center; justify-content:center; padding: 20px">
-  <img src="https://github.com/louisbrandt.png?size=100" style='height: 100px; width: 100px; border-radius:50px; margin-bottom: 10px'>
-  <p style="color: black; width:100">Louis Brandt</p>
-</a>
-</div>
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/LudekCizinsky"><img src="https://github.com/LudekCizinsky.png?size=50" width="100px;" alt=""/><br /><sub><b>Ludek Cizinsky</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/jonas-mika"><img src="https://github.com/jonas-mika.png?size=50" width="100px;" alt=""/><br /><sub><b>Jonas-Mika Senghaas</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/lukyrasocha"><img src="https://github.com/lukyrasocha.png?size=50" width="100px;" alt=""/><br /><sub><b>Lukas Rasocha</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/louisbrandt"><img src="https://github.com/louisbrandt.png?size=50" width="100px;" alt=""/><br /><sub><b>Louis Brandt</b></sub></a><br /></td>
+  </tr>
+</table>
 
 
 # Get started
