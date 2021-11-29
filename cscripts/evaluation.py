@@ -1,26 +1,45 @@
 # evaluation.py 
 # script holding function to evaluate the quality of recommendation based on queried metadata
 
-# last modified     : 26/11/21
+# last modified     : 29/11/21
 # author            : jonas-mika senghaas
 
 import json
 import os
+import numpy as np
+from tqdm import tqdm
 
 from envvars import GITHUB_TOKEN
 from github_api import ReposSummary
 
-# expected format for recommendations
 """
+# expected format for recommendations
 metadata = {'luky/na': {'languages': [['Python', 550], ['Java', 220]]}, 
             'jonas-mika/eduml': {'languages': [['Python', 2000]]},
             'ludek/dotfiles': {'languages': [['vim', 220], ['Python', 100]]}
            }
 
-recommend = {'rails/rails': ['technoweenie/restful-authentication']}
-"""
+data = {'rails/rails': ['technoweenie/restful-authentication']}
 
-def evaluate_recommendation(recommendations, attributes):
+"""
+def build_evaluation_metadata(metadata, attributes, filepath='.', name='evaluation_metadata'):
+    os.makedirs(filepath) if not os.path.exists(filepath) else None
+
+    ans = {}
+    for key, val in metadata.items():
+        try:
+            nkey = metadata[key]['repo_name']
+            nval = {attribute: metadata[key][attribute] for attribute in attributes}
+        except: None
+
+        ans[nkey] = nval
+
+    with open(f'{filepath}/{name}.json', 'w') as outfile:
+        json.dump(ans, outfile)
+
+
+
+def evaluate_recommendation(recommendations, metadata, attributes, test_size=0.5, total_score=False):
     """
     function to evaluate the quality of the recommendation based on metadata.
     reads in underlying datastructure of the recommendation system (a dictionary that 
@@ -37,48 +56,92 @@ def evaluate_recommendation(recommendations, attributes):
     the score is averaged over the n recommended repository, the per repo score is a weighted
     average. the total score is averaged over all recommendations.
     """
-    total_score = 0
-    missing_metadata = 0
-
-    n_recommend = len(list(recommendations.values())[0])
     n_repos = len(recommendations)
-    n_attributes = len(attributes)
 
-    api = ReposSummary(GITHUB_TOKEN)
 
-    for repo in recommendations: # maybe: subset of repos
+    if isinstance(test_size, int):
+        random_sample_repos = np.random.choice(list(recommendations.keys()), size=test_size, replace=False) 
+        random_sample = {repo: recommendations[repo] for repo in random_sample_repos} 
+    elif isinstance(test_size, float):
+        random_sample_repos = np.random.choice(list(recommendations.keys()), size=int(test_size*n_repos), replace=False)
+        random_sample = {repo: recommendations[repo] for repo in random_sample_repos} 
+
+    random_sample = recommendations
+    attribute_scores = {attribute: None for attribute in attributes}
+    for attribute in attributes:
+        attribute_score = _evaluate_attribute(random_sample, 
+                                              metadata, 
+                                              attribute, 
+                                              algorithm='jaccard', normalise=True)
+        attribute_scores[attribute] = attribute_score
+
+    if total_score:
+        return np.mean(list(attribute_scores.values()))
+    return attribute_scores
+
+
+def _evaluate_attribute(random_sample, metadata, attribute, algorithm='jaccard', normalise=True):
+    attribute_score = 0
+
+    n_repos = len(random_sample)
+    #n_recommend = len(list(random_sample.values())[0])
+
+    # api = ReposSummary(GITHUB_TOKEN)
+
+    src_missing = 0 
+    for repo in random_sample: # maybe: subset of repos
         repo_score = 0
-        src_res = api.get_relevant_repo_info(repo)
 
-        print(getattr(src_res, 'language'))
-        if not src_res.has_meta:
-            missing_metadata += 1
-            break
+        src = metadata[repo] 
+        #print('working on: ', repo)
+        src_attr = {x[0] for x in src[attribute]}
 
-        recommend_missing_metadata = 0
-        scores = {attribute: 0 for attribute in attributes}
+        if src_attr == None:
+            src_missing += 1
+            continue
 
-        for recommended in recommendations[repo]:
-            trg_res = api.get_relevant_repo_info(recommended)
+        trg_missing = 0
+        n_recommend = 0
+        for recommended in random_sample[repo]:
+            trg = metadata[recommended]
+            trg_attr = {x[0] for x in trg[attribute]}
 
-            if not trg_res.has_meta:
-                recommend_missing_metadata += 1
-                break
+            if trg_attr  == None:
+                trg_missing += 1
+                continue
 
-            for attribute in attributes:
-                src_attr = getattr(src_res, attribute)
-                trg_attr = getattr(trg_res, attribute)
-                scores[attribute] = len(src_attr & trg_attr) / len(src_attr | trg_attr)
+            #print(src_attr, trg_attr)
+            score = len(src_attr & trg_attr) / len(src_attr | trg_attr)
+            #print(score)
+            repo_score += score
+            n_recommend += 1
 
         # normalise all score
-        for score in scores:
-            scores[score] /= (n_recommend - recommend_missing_metadata) 
+        if n_recommend - trg_missing > 0:
+            repo_score /= (n_recommend - trg_missing) 
+        else:
+            repo_score = 0
+        #print(repo_score, '\n')
+        attribute_score += repo_score
 
-        # normalise summed attributes score and add total score
-        total_score += sum(scores.values()) / n_attributes
+    # normalise summed attributes score and add total score
+    if n_repos - src_missing > 0:
+        attribute_score /= (n_repos - src_missing)
+    else:
+        attribute_score = 0
 
-    # normalise total score and return
-    return total_score / (n_repos - missing_metadata)
+    return attribute_score
+
 
 if __name__ == '__main__':
-    print(evaluate_recommendation(recommend, ['language']))
+    np.random.seed(0)
+    with open('../data/evaluation/evaluation_metadata.json', 'r') as infile:
+        metadata = json.load(infile)
+
+    algs = ['naive_recommend', 'search_depth']
+
+    for alg in algs:
+        with open(f'./{alg}.json', 'r') as infile:
+            data = json.load(infile)
+
+        print(alg, ':', evaluate_recommendation(data, metadata, attributes=['languages'], test_size=0.5))
