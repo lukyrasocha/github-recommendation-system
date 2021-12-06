@@ -9,8 +9,9 @@ import os
 import numpy as np
 from tqdm import tqdm
 
-from envvars import GITHUB_TOKEN
-from github_api import ReposSummary
+
+#from envvars import GITHUB_TOKEN
+#from github_api import ReposSummary
 
 """
 # expected format for recommendations
@@ -135,10 +136,14 @@ def _evaluate_attribute(random_sample, metadata, attribute, algorithm='jaccard',
 
 if __name__ == '__main__':
     np.random.seed(0)
+    with open('../data/transformed/metadata.json') as infile:
+        metadata = json.load(infile)
+
+    build_evaluation_metadata(metadata, ['languages'],filepath='../data/evaluation/')
     with open('../data/evaluation/evaluation_metadata.json', 'r') as infile:
         metadata = json.load(infile)
 
-    algs = ['naive_recommend', 'search_depth']
+    algs = ['naive_hyperbolic','search_depth_hyperbolic'] #['naive_recommend', 'search_depth']
 
     for alg in algs:
         with open(f'./{alg}.json', 'r') as infile:
