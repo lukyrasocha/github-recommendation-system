@@ -43,7 +43,7 @@ def search_depth_recommend(G, n=5, sort_by='weight', search_depth='max'):
         search_depth = math.inf
 
     recommendations = {}
-    for node in G.nodes():
+    for node in tqdm(G.nodes()):
         path = [] 
         # start dijkstras with search depth
         current_search_depth = 1
@@ -122,7 +122,7 @@ if __name__ == '__main__':
 
     print('Loading backboned')
     df = backboning.thresholding(
-                pd.read_csv(f"../data/backboning/noise_corrected/heats.csv"),
+                pd.read_csv(f"../data/backboning/noise_corrected/hyperbolic.csv"),
                 SIGNIF_THRS)
     print('Finished loading\n')
 
@@ -130,7 +130,7 @@ if __name__ == '__main__':
     print('Starting thresholding')
     G = nx.convert_matrix.from_pandas_edgelist(df, source="src", target="trg", 
                                                edge_attr=["nij", "score"], 
-                                               create_using=nx.DiGraph)
+                                               create_using=nx.Graph)
     print('Finished thresholding\n')
 
     print('Loading Metadata')
@@ -151,7 +151,7 @@ if __name__ == '__main__':
     print('Starting building recommendation graph')
     recommendation = search_depth_recommend(G, n=5, sort_by='nij')
     print(recommendation)
-    write_recommendation(recommendation, metadata, name='search_depth')
+    write_recommendation(recommendation, metadata, name='search_depth_hyperbolic')
     print('done')
 
     #print('Naive Recommend: ', naive_recommend(G, n=2))
