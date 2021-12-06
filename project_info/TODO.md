@@ -117,18 +117,23 @@ from the source node to the LCC node.
 
 - [x] Random Search Button
 - [x] Add relevant metadata using GithubApi for recommended repos
-- [ ] Fix weird wrapping of long titles
+- [x] Fix weird wrapping of long titles
 - [ ] find more relevant metadata
 - [ ] maybe also display metadata of repo that was queried
-- [ ] render a loading symbol while metadata is fetching
+- [x] render a loading symbol while metadata is fetching
 - [ ] hide github api token
+- [x] buttons are major problem
+- [x] implemented all different recommendation systems (algorithm + mainstream/ niche)
 
 # Presentation
 
-- [ ] slides about projections methods (and how we arrive at the conclusion to use `HeatS`) 
+- [x] slides about projections methods (and how we arrive at the conclusion to use `HeatS`) 
 - [ ] slides about backboning methods (and how we arrive at the conclusion to use `noise_corrected`)
-- [ ] slides about recommendation algorithms ()
-- [ ] slides about evaluation system and their interpretation ()
+- [x] slides about recommendation algorithms ()
+- [x] slides about evaluation system and their interpretation ()
+
+- [ ] condense presentation
+- [ ] time presentation
 
 *Note: Show all these steps on small test graphs that represent our data*
 

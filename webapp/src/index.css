@@ -27,8 +27,8 @@ a {
     align-items: center;
     flex-direction: column;
     width: 50vw;
-    max-width: 500px;
-    min-width: 300px;
+    max-width: 700px;
+    min-width: 500px;
     height: 70vh;
     min-height: 700px;
     max-height: 1000px;
@@ -38,6 +38,18 @@ a {
         0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
         0 22.3px 17.9px rgba(0, 0, 0, 0.072),
         0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+@media only screen and (max-width: 600px) {
+  .main-container {
+    width: 80vw;
+    min-width: 80vw;
+    max-width: 80vw;
+
+    height: 90vh;
+    min-height: 90vh;
+    max-height: 90vh;
+  }
 }
 
 .main-container .header {
@@ -51,14 +63,20 @@ a {
     flex-direction: column;
 }
 
+
 .header img {
-    height: 50px;
-    width: 50px;
+    max-height: 50px;
+    max-width: 50px;
 }
 
 .header h1 {
-    padding: 20px 0 40px 0px;
-    margin: 0;
+    padding: 20px 0 0px 0px;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-container .header h1{
+      font-size: 45px;
+  }
 }
 
 .search-container {
@@ -67,9 +85,73 @@ a {
     overflow: scroll;
 }
 
+.toggles {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0px;
+    width: 100%;
+}
+
+.toggle {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px 10px;
+}
+
+.type .left {
+    position: absolute;
+    right: 60%;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
+.type .right {
+    position: absolute;
+    left: 60%;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
+.algorithm .left  {
+    position: absolute;
+    right: 60%;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
+.algorithm .right  {
+    position: absolute;
+    left: 60%;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
+@media only screen and (max-width: 600px) {
+  .type .left {
+      font-size: 11px;
+  }
+  .type .right {
+      font-size: 11px;
+  }
+  .algorithm .left {
+      font-size: 11px;
+  }
+  .algorithm .right {
+      font-size: 11px;
+  }
+}
+
+
+/*
 .search-container::-webkit-scrollbar {
     display: none;
 }
+*/
 
 .Search {
     width: 100%;
@@ -96,35 +178,49 @@ a {
     padding: 5px;
     border: none;
     outline: none;
-    border: 1px solid grey;
+    border: 2px solid grey;
     border-radius: 20px;
     transition: 0.25s ease-in-out;
     text-align: center;
 }
 
+@media only screen and (max-width: 600px) {
+  .Search input {
+      width: 90%;
+  }
+}
+
 .Search input:focus {
-    border: 1px solid magenta;
+    border: 2px solid magenta;
 }
 
 .Search input:hover {
-    border: 1px solid magenta;
+    border: 2px solid magenta;
 }
 
 .Search button {
-    background-color: grey;
+    background-color: black;
+    border: none;
     opacity: 0.5;
     color: white;
     margin: 0 5px;
     margin-top: 20px;
-    border: none;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
+    letter-spacing: 0.5px;
     border-radius: 20px;
     transition: 0.25s ease-in-out;
 }
 
+@media only screen and (max-width: 600px) {
+  .Search button {
+      font-size: 10px;
+  }
+}
+
 .Search button:hover {
+    background-color: magenta;
     opacity: 1;
     cursor: pointer;
 }
@@ -142,6 +238,14 @@ a {
     margin-bottom: 20px;
     padding: 30px 20px;
     transition: 0.25s ease-in-out;
+    width: 88%;
+    min-height: 70px;
+}
+
+@media only screen and (max-width: 600px) {
+  .Repo {
+    width: 82%;
+  }
 }
 
 .Repo:hover {
@@ -151,13 +255,23 @@ a {
 .Repo .image {
     width: 60px;
     height: 60px;
-    margin-right: 20px;
+    margin-right: 40px;
+}
+
+@media only screen and (max-width: 600px) {
+    .Repo .image {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+  }
 }
 
 img {
     width: 100%;
     border-radius: 30px;
 }
+
+
 
 .Repo .content-container {
     width: 90%;
@@ -170,16 +284,29 @@ img {
     margin-bottom: 15px;
 }
 
-.title.name {
+@media only screen and (max-width: 600px) {
+  .Repo .title {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}
+
+.title .name {
     font-size: 20px;
     letter-spacing: 1px;
     max-width: 60%;
-    border: 1px solid green;
     /*
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 	*/
+}
+
+@media only screen and (max-width: 600px) {
+  .title .name {
+      font-size: 13px;
+      max-width: 90%;
+  }
 }
 
 .title .icons {
@@ -189,12 +316,19 @@ img {
     width: 20%;
 }
 
+@media only screen and (max-width: 600px) {
+  .title .icons {
+      display: none
+  }
+}
+
 .icons .icon {
-    width: 20px;
-    height: 20px;
+    max-width: 20px;
+    max-height: 20px;
     padding: 2px;
     border-radius: 5px;
 }
+
 
 .center {
     width: 100%;
@@ -208,11 +342,28 @@ img {
     width: 100%;
 }
 
+@media only screen and (max-width: 600px) {
+    .Repo .metadata-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
 .Repo .info-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+@media only screen and (max-width: 600px) {
+    .Repo .info-container {
+        flex-direction: row-reverse;
+        width: 70%;;
+        justify-content: space-between;
+    }
+}
+
+
 
 .Repo .metadata {
     font-size: 13px;
@@ -222,11 +373,23 @@ img {
     margin-bottom: 2px;
 }
 
+@media only screen and (max-width: 600px) {
+  .Repo .metadata {
+      font-size: 9px;
+  }
+}
+
 .Repo .info {
     text-transform: uppercase;
     font-size: 8px;
     color: grey;
     margin: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .Repo .info {
+      font-size: 7px;
+  }
 }
 
 .copyright {

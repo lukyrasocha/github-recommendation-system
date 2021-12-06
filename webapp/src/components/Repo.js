@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { BiGitRepoForked } from 'react-icons/bi';
 import { FaWikipediaW } from 'react-icons/fa';
 import { AiOutlineIssuesClose } from 'react-icons/ai';
+import Loader from 'react-loader-spinner';
 
-const Repo = ({ name, found }) => {
+const Repo = ({ name, found, last }) => {
     const [fetched, setFetched] = useState(false);
     const [metadata, setMetadata] = useState({
         owner: {
@@ -51,13 +52,14 @@ const Repo = ({ name, found }) => {
 
     return (
         <div>
-            {found ? (
+            {found ? 
+                fetched ? (
                 <a
                     href={`https://www.github.com/${name}`}
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <div className="Repo">
+                    <div className="Repo" style={{marginBottom: last ? 0 : 20}}>
                         <div className="image">
                             <img
                                 src={metadata.owner.avatar_url}
@@ -127,8 +129,14 @@ const Repo = ({ name, found }) => {
                         </div>
                     </div>
                 </a>
-            ) : (
-                <div className="Repo">
+            ) : <Loader 
+                    type='ThreeDots' 
+                    color="#FF00FF"
+                    height={40}
+                    width={40}
+                    className='Repo'/>
+                : (
+                <div className="Repo" style={{border: 'none'}}>
                     <h3 className="repo_name">Could not find.</h3>
                 </div>
             )}
