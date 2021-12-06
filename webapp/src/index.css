@@ -57,8 +57,7 @@ a {
 }
 
 .header h1 {
-    padding: 20px 0 40px 0px;
-    margin: 0;
+    padding: 20px 0 0px 0px;
 }
 
 .search-container {
@@ -66,6 +65,53 @@ a {
     width: 100%;
     overflow: scroll;
 }
+
+.toggles {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0px;
+    width: 100%;
+}
+
+.toggle {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px 10px;
+}
+
+.type .left {
+    position: absolute;
+    right: 300px;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
+.type .right {
+    position: absolute;
+    left: 300px;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
+.algorithm .left  {
+    position: absolute;
+    right: 300px;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
+.algorithm .right  {
+    position: absolute;
+    left: 300px;
+    font-size: 13px;
+    transition: 0.25s ease-in-out;
+}
+
 
 /*
 .search-container::-webkit-scrollbar {

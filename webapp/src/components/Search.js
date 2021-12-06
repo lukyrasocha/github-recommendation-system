@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Repo from './Repo';
 
 const Search = ({ data }) => {
@@ -15,17 +15,17 @@ const Search = ({ data }) => {
         setSearch(random_repo);
     };
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-
-        if (search in data) {
-            setRes(data[search]);
-            setHasRes(true);
-        } else {
-            setRes(null);
-            setHasRes(true);
+    const handleSearch = () => {
+        // e.preventDefault();
+        if (search !== '') {
+            if (search in data) {
+                setRes(data[search]);
+                setHasRes(true);
+            } else {
+                setRes(null);
+                setHasRes(true);
+            }
         }
-        setSearch('');
     };
 
     const clearAll = () => {
@@ -58,6 +58,13 @@ const Search = ({ data }) => {
         }
     };
 
+    useEffect(() => {
+        console.log('changed data');
+        handleSearch();
+        displayResults(hasRes, res);
+    }, [data])
+
+
     return (
         <div className="Search">
             <form>
@@ -71,7 +78,9 @@ const Search = ({ data }) => {
                     onChange={(e) => setSearch(e.target.value)}
                 />
                 <div className="buttons">
-                    <button type="submit" onClick={(e) => handleSearch(e)}>
+                    <button type="submit" onClick={(e) => {
+                        e.preventDefault();
+                        handleSearch()}}>
                         Search
                     </button>
                     <button
