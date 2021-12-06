@@ -128,7 +128,7 @@ const Repo = ({ name, found, last }) => {
                     </div>
                 </a>
             ) : (
-                <div className="Repo">
+                <div className="Repo" style={{border: 'none'}}>
                     <h3 className="repo_name">Could not find.</h3>
                 </div>
             )}
