@@ -3,8 +3,8 @@ import Repo from './Repo';
 
 const Search = ({ data }) => {
     const [search, setSearch] = useState('');
-    const [res, setRes] = useState(null);
-    const [hasRes, setHasRes] = useState(false);
+    const [res, setRes] = useState(null); // can be null if no search, [] if no results e, [ ]
+    //const [hasRes, setHasRes] = useState(false);
 
     const randomRepo = (e) => {
         e.preventDefault();
@@ -20,23 +20,23 @@ const Search = ({ data }) => {
         if (search !== '') {
             if (search in data) {
                 setRes(data[search]);
-                setHasRes(true);
+                //setHasRes(true);
             } else {
-                setRes(null);
-                setHasRes(true);
+                setRes([]);
+                //setHasRes(true);
             }
         }
     };
 
     const clearAll = () => {
-        setHasRes(false);
+        //setHasRes(false);
         setRes(null);
         setSearch('');
     };
 
-    const displayResults = (hasRes, res) => {
-        if (hasRes) {
-            if (res !== null) {
+    const displayResults = (res) => {
+        if (res !== null) {
+            if (res.length > 0) {
                 return (
                     <div className="results">
                         {res.map((name, index) => {
@@ -59,9 +59,8 @@ const Search = ({ data }) => {
     };
 
     useEffect(() => {
-        console.log('changed data');
         handleSearch();
-        displayResults(hasRes, res);
+        displayResults(res);
     }, [data])
 
 
@@ -95,7 +94,7 @@ const Search = ({ data }) => {
                 </div>
             </form>
             <div className="search-container">
-                {displayResults(hasRes, res)}
+                {displayResults(res)}
             </div>
         </div>
     );
