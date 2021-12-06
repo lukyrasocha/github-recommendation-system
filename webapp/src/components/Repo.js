@@ -60,10 +60,12 @@ const Repo = ({ name, found, last }) => {
                     rel="noreferrer"
                 >
                     <div className="Repo" style={{marginBottom: last ? 0 : 20}}>
-                        <img
-                            src={metadata.owner.avatar_url}
-                            alt="user_avatar"
-                        />
+                        <div className="image">
+                            <img
+                                src={metadata.owner.avatar_url}
+                                alt="user_avatar"
+                            />
+                        </div>
                         <div className="content-container">
                             <div className="title">
                                 <h3 className="name">{name}</h3>
