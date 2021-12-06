@@ -4,7 +4,6 @@ import Repo from './Repo';
 const Search = ({ data }) => {
     const [search, setSearch] = useState('');
     const [res, setRes] = useState(null); // can be null if no search, [] if no results e, [ ]
-    //const [hasRes, setHasRes] = useState(false);
 
     const randomRepo = (e) => {
         e.preventDefault();
@@ -13,6 +12,9 @@ const Search = ({ data }) => {
         const random_repo = keys[(keys.length * Math.random()) << 0];
 
         setSearch(random_repo);
+        console.log(search);
+        handleSearch();
+        displayResults(res);
     };
 
     const handleSearch = () => {
@@ -20,16 +22,13 @@ const Search = ({ data }) => {
         if (search !== '') {
             if (search in data) {
                 setRes(data[search]);
-                //setHasRes(true);
             } else {
                 setRes([]);
-                //setHasRes(true);
             }
         }
     };
 
     const clearAll = () => {
-        //setHasRes(false);
         setRes(null);
         setSearch('');
     };
@@ -61,7 +60,8 @@ const Search = ({ data }) => {
     useEffect(() => {
         handleSearch();
         displayResults(res);
-    }, [data])
+    }, [data, search])
+
 
 
     return (
