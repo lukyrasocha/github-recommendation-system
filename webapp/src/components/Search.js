@@ -40,7 +40,11 @@ const Search = ({ data }) => {
                 return (
                     <div className="results">
                         {res.map((name, index) => {
-                            return <Repo key={name} name={name} found={true} />;
+                            if (index === res.length-1) {
+                                return <Repo key={name} name={name} found={true} last={true}/>
+                            } else {
+                                return <Repo key={name} name={name} found={true} last={false}/>
+                            }
                         })}
                     </div>
                 );

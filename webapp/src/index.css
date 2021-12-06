@@ -67,9 +67,11 @@ a {
     overflow: scroll;
 }
 
+/*
 .search-container::-webkit-scrollbar {
     display: none;
 }
+*/
 
 .Search {
     width: 100%;
@@ -96,35 +98,37 @@ a {
     padding: 5px;
     border: none;
     outline: none;
-    border: 1px solid grey;
+    border: 2px solid grey;
     border-radius: 20px;
     transition: 0.25s ease-in-out;
     text-align: center;
 }
 
 .Search input:focus {
-    border: 1px solid magenta;
+    border: 2px solid magenta;
 }
 
 .Search input:hover {
-    border: 1px solid magenta;
+    border: 2px solid magenta;
 }
 
 .Search button {
-    background-color: grey;
+    background-color: black;
+    border: none;
     opacity: 0.5;
     color: white;
     margin: 0 5px;
     margin-top: 20px;
-    border: none;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
+    letter-spacing: 0.5px;
     border-radius: 20px;
     transition: 0.25s ease-in-out;
 }
 
 .Search button:hover {
+    background-color: magenta;
     opacity: 1;
     cursor: pointer;
 }
@@ -142,6 +146,7 @@ a {
     margin-bottom: 20px;
     padding: 30px 20px;
     transition: 0.25s ease-in-out;
+    width: 88%;
 }
 
 .Repo:hover {

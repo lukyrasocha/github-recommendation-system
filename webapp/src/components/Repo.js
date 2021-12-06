@@ -3,7 +3,7 @@ import { BiGitRepoForked } from 'react-icons/bi';
 import { FaWikipediaW } from 'react-icons/fa';
 import { AiOutlineIssuesClose } from 'react-icons/ai';
 
-const Repo = ({ name, found }) => {
+const Repo = ({ name, found, last }) => {
     const [fetched, setFetched] = useState(false);
     const [metadata, setMetadata] = useState({
         owner: {
@@ -57,7 +57,7 @@ const Repo = ({ name, found }) => {
                     target="_blank"
                     rel="noreferrer"
                 >
-                    <div className="Repo">
+                    <div className="Repo" style={{marginBottom: last ? 0 : 20}}>
                         <div className="image">
                             <img
                                 src={metadata.owner.avatar_url}
