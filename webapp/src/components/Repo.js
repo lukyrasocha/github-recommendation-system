@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BiGitRepoForked } from 'react-icons/bi';
 import { FaWikipediaW } from 'react-icons/fa';
 import { AiOutlineIssuesClose } from 'react-icons/ai';
+import Loader from 'react-loader-spinner';
 
 const Repo = ({ name, found, last }) => {
     const [fetched, setFetched] = useState(false);
@@ -51,19 +52,18 @@ const Repo = ({ name, found, last }) => {
 
     return (
         <div>
-            {found ? (
+            {found ? 
+                fetched ? (
                 <a
                     href={`https://www.github.com/${name}`}
                     target="_blank"
                     rel="noreferrer"
                 >
                     <div className="Repo" style={{marginBottom: last ? 0 : 20}}>
-                        <div className="image">
-                            <img
-                                src={metadata.owner.avatar_url}
-                                alt="user_avatar"
-                            />
-                        </div>
+                        <img
+                            src={metadata.owner.avatar_url}
+                            alt="user_avatar"
+                        />
                         <div className="content-container">
                             <div className="title">
                                 <h3 className="name">{name}</h3>
@@ -127,7 +127,13 @@ const Repo = ({ name, found, last }) => {
                         </div>
                     </div>
                 </a>
-            ) : (
+            ) : <Loader 
+                    type='ThreeDots' 
+                    color="#FF00FF"
+                    height={40}
+                    width={40}
+                    className='Repo'/>
+                : (
                 <div className="Repo" style={{border: 'none'}}>
                     <h3 className="repo_name">Could not find.</h3>
                 </div>
